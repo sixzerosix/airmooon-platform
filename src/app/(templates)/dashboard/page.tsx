@@ -1,13 +1,11 @@
-import { Main, Section } from "@/components/layouts";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Main, Section, Container } from "@/components/layouts";
 
 export default function DashboardPage() {
 	return (
-		<Main>
-			<Section>
-				<SidebarTrigger />
-				<h1>Dashboard</h1>
-			</Section>
-		</Main>
+		<Section>
+			<Container>
+				<p>Welcome to the dashboard!</p>
+			</Container>
+		</Section>
 	);
 }

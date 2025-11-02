@@ -32,7 +32,6 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { title } from "process";
 
 // Menu items.
 const items = [
@@ -123,7 +122,7 @@ const items = [
 	},
 	{
 		title: "Настройки",
-		url: "#",
+		url: "/settings",
 		icon: Settings,
 	},
 ];

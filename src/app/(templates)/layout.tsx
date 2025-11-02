@@ -1,6 +1,7 @@
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "./sidebar/appSidebar";
-
+import { Container, Main, Section } from "@/components/layouts";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 interface LayoutProps {
 	children: React.ReactNode;
 }
@@ -10,7 +11,12 @@ export default function Layout({ children }: LayoutProps) {
 		<SidebarProvider>
 			<AppSidebar />
 			<SidebarInset>
-				<div>{children}</div>
+				<Section size={"xs"}>
+					<Container size={"full"}>
+						<SidebarTrigger />
+					</Container>
+				</Section>
+				<Main>{children}</Main>
 			</SidebarInset>
 		</SidebarProvider>
 	);
