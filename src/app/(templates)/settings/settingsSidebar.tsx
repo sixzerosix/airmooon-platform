@@ -54,7 +54,7 @@ const items = [
 	},
 	{
 		title: "Безопасность",
-		url: "#",
+		url: "/settings/security",
 		icon: Users,
 	},
 	{
@@ -79,7 +79,7 @@ export function SettingsSidebar() {
 	console.log(pathname);
 
 	return (
-		<nav className="w-full border border-border rounded-xl">
+		<nav className="w-full border border-border rounded-xl sticky top-24">
 			<SidebarGroup>
 				<SidebarGroupContent>
 					<SidebarMenu>

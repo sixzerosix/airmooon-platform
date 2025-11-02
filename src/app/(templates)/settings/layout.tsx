@@ -10,9 +10,9 @@ export default function SettingsLayout({
 	return (
 		<Section>
 			<Container>
-				<div className="flex gap-5">
+				<div className="flex gap-5 justify-between">
 					{/* Content */}
-					<div className="flex-1">{children}</div>
+					<div className="flex-1 max-w-2xl">{children}</div>
 					{/* Navigation settings */}
 					<div className="basis-2xs">
 						<SettingsSidebar />
