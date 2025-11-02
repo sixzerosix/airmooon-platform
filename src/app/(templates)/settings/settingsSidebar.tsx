@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	Calendar,
 	Home,
@@ -30,11 +32,14 @@ import {
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
 // Menu items.
 const items = [
 	{
 		title: "Аккаунт",
-		url: "#",
+		url: "/settings/account",
 		icon: Building2,
 	},
 	{
@@ -70,6 +75,9 @@ const items = [
 ];
 
 export function SettingsSidebar() {
+	const pathname = usePathname(); // Получаем текущий путь
+	console.log(pathname);
+
 	return (
 		<nav className="w-full border border-border rounded-xl">
 			<SidebarGroup>
@@ -78,10 +86,17 @@ export function SettingsSidebar() {
 						{items.map((item) => (
 							<SidebarMenuItem key={item.title}>
 								<SidebarMenuButton asChild>
-									<a href={item.url}>
+									<Link
+										href={item.url}
+										className={
+											pathname === item.url
+												? "bg-sidebar-accent text-sidebar-accent-foreground"
+												: ""
+										}
+									>
 										<item.icon />
 										<span>{item.title}</span>
-									</a>
+									</Link>
 								</SidebarMenuButton>
 							</SidebarMenuItem>
 						))}

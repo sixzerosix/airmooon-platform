@@ -6,7 +6,7 @@ export default function Settings() {
 	return (
 		<>
 			<Card>
-				<CardContent>Hello!</CardContent>
+				<CardContent>Account</CardContent>
 			</Card>
 		</>
 	);
