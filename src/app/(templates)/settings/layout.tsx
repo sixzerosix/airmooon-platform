@@ -14,7 +14,7 @@ export default function SettingsLayout({
 					{/* Content */}
 					<div className="flex-1 max-w-2xl">{children}</div>
 					{/* Navigation settings */}
-					<div className="basis-2xs">
+					<div className="max-w-3xs w-full">
 						<SettingsSidebar />
 					</div>
 				</div>

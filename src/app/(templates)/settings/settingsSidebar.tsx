@@ -11,6 +11,9 @@ import {
 	Users,
 	Gem,
 	Menu,
+	ShieldCheck,
+	Bell,
+	UserRound,
 } from "lucide-react";
 
 import {
@@ -42,7 +45,7 @@ const items = [
 	{
 		title: "Аккаунт",
 		url: "/settings/account",
-		icon: Building2,
+		icon: UserRound,
 	},
 	{
 		title: "Профиль",
@@ -52,12 +55,12 @@ const items = [
 	{
 		title: "Уведомления",
 		url: "#",
-		icon: Gem,
+		icon: Bell,
 	},
 	{
 		title: "Безопасность",
 		url: "/settings/security",
-		icon: Users,
+		icon: ShieldCheck,
 	},
 	{
 		title: "Роли",

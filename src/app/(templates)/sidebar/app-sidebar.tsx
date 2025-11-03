@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	Calendar,
 	Home,
@@ -20,6 +22,13 @@ import {
 	Puzzle,
 	Gem,
 	Settings,
+	Hamburger,
+	GalleryVerticalEnd,
+	AudioWaveform,
+	Command,
+	Landmark,
+	Dna,
+	Cpu,
 } from "lucide-react";
 
 import {
@@ -28,10 +37,13 @@ import {
 	SidebarGroup,
 	SidebarGroupContent,
 	SidebarGroupLabel,
+	SidebarHeader,
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+import { CompanySwitcher } from "./company-switcher";
 
 // Menu items.
 const items = [
@@ -44,6 +56,11 @@ const items = [
 		title: "Компания",
 		url: "#",
 		icon: Building2,
+	},
+	{
+		title: "Продукты",
+		url: "#",
+		icon: Hamburger,
 	},
 	{
 		title: "Пространства",
@@ -127,9 +144,35 @@ const items = [
 	},
 ];
 
+const companies = [
+	{
+		name: "SOW Capital",
+		logo: Landmark,
+		plan: "Активная",
+	},
+	{
+		name: "БиоТех",
+		logo: Dna,
+		plan: "Ростущая",
+	},
+	{
+		name: "AI Технологии",
+		logo: Cpu,
+		plan: "Формирование",
+	},
+	{
+		name: "Evil Corp.",
+		logo: Command,
+		plan: "Приостановленная",
+	},
+];
+
 export function AppSidebar() {
 	return (
 		<Sidebar>
+			<SidebarHeader>
+				<CompanySwitcher companies={companies} />
+			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel>Application</SidebarGroupLabel>

@@ -1,5 +1,5 @@
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { AppSidebar } from "./sidebar/appSidebar";
+import { AppSidebar } from "./sidebar/app-sidebar";
 import { Container, Main, Section } from "@/components/layouts";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { BreadcrumbSettings } from "./breadcrumbSettings";
