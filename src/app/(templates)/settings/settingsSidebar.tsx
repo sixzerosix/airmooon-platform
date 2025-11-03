@@ -1,27 +1,16 @@
 "use client";
 
+import { useIsMobile } from "@/hooks/use-mobile";
+
 import {
-	Calendar,
-	Home,
-	Inbox,
-	Search,
 	IdCard,
-	BookUser,
 	Drama,
-	Orbit,
 	Building2,
-	Blocks,
-	ListCheck,
-	ScrollText,
-	ListTodo,
 	Bot,
-	Combine,
 	BotMessageSquare,
 	Users,
-	Footprints,
-	Puzzle,
 	Gem,
-	Settings,
+	Menu,
 } from "lucide-react";
 
 import {
@@ -31,6 +20,19 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+import {
+	Drawer,
+	DrawerClose,
+	DrawerContent,
+	DrawerDescription,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerTitle,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
+
+import { Button } from "@/components/ui/button";
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -75,34 +77,73 @@ const items = [
 ];
 
 export function SettingsSidebar() {
+	const isMobile = useIsMobile();
 	const pathname = usePathname(); // Получаем текущий путь
-	console.log(pathname);
 
 	return (
-		<nav className="w-full border border-border rounded-xl sticky top-24">
-			<SidebarGroup>
-				<SidebarGroupContent>
-					<SidebarMenu>
-						{items.map((item) => (
-							<SidebarMenuItem key={item.title}>
-								<SidebarMenuButton asChild>
-									<Link
-										href={item.url}
-										className={
-											pathname === item.url
-												? "bg-sidebar-accent text-sidebar-accent-foreground"
-												: ""
-										}
-									>
-										<item.icon />
-										<span>{item.title}</span>
-									</Link>
-								</SidebarMenuButton>
-							</SidebarMenuItem>
-						))}
-					</SidebarMenu>
-				</SidebarGroupContent>
-			</SidebarGroup>
-		</nav>
+		(isMobile && (
+			<Drawer>
+				<DrawerTrigger asChild>
+					<Button
+						variant="outline"
+						size={"icon-sm"}
+						className="fixed bottom-10 right-10"
+					>
+						<Menu />
+					</Button>
+				</DrawerTrigger>
+				<DrawerContent>
+					<SidebarGroup>
+						<SidebarGroupContent>
+							<SidebarMenu>
+								{items.map((item) => (
+									<SidebarMenuItem key={item.title}>
+										<SidebarMenuButton asChild>
+											<Link
+												href={item.url}
+												className={
+													pathname === item.url
+														? "bg-sidebar-accent text-sidebar-accent-foreground"
+														: ""
+												}
+											>
+												<item.icon />
+												<span>{item.title}</span>
+											</Link>
+										</SidebarMenuButton>
+									</SidebarMenuItem>
+								))}
+							</SidebarMenu>
+						</SidebarGroupContent>
+					</SidebarGroup>
+				</DrawerContent>
+			</Drawer>
+		)) || (
+			<nav className="w-full border border-border rounded-xl sticky top-24">
+				<SidebarGroup>
+					<SidebarGroupContent>
+						<SidebarMenu>
+							{items.map((item) => (
+								<SidebarMenuItem key={item.title}>
+									<SidebarMenuButton asChild>
+										<Link
+											href={item.url}
+											className={
+												pathname === item.url
+													? "bg-sidebar-accent text-sidebar-accent-foreground"
+													: ""
+											}
+										>
+											<item.icon />
+											<span>{item.title}</span>
+										</Link>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							))}
+						</SidebarMenu>
+					</SidebarGroupContent>
+				</SidebarGroup>
+			</nav>
+		)
 	);
 }

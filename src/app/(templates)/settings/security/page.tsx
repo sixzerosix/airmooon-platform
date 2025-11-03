@@ -14,6 +14,7 @@ import {
 	InputGroup,
 	InputGroupAddon,
 	InputGroupInput,
+	InputGroupButton,
 } from "@/components/ui/input-group";
 
 import {
@@ -45,18 +46,43 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 import {
-	BadgeCheckIcon,
-	ChevronRightIcon,
-	CheckCircle2Icon,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+
+import {
 	MailIcon,
-	BadgeX,
+	Eye,
+	EyeOff,
+	Computer,
+	Smartphone,
+	EllipsisVertical,
+	Ellipsis,
 } from "lucide-react";
 
 export default function Security() {
 	const [isAdditionalEmail, setIsAdditionalEmail] = useState(false);
+	const [isVisiblePassword, setIsVisiblePassword] = useState(false);
 	return (
 		<div className="grid gap-5">
 			<Card>
@@ -64,276 +90,115 @@ export default function Security() {
 					<h2 className="text-lg font-medium">Безопасность</h2>
 				</CardContent>
 				<CardContent>
-					<div className="grid grid-cols-1 gap-5">
-						<div className="grid gap-3">
-							<Label htmlFor="userPassword">Пароль</Label>
-							<div className="flex gap-3">
-								<Input
-									type="password"
-									id="userPassword"
-									placeholder="Пароль"
-									defaultValue={"**********"}
-									disabled
-								/>
-								<Button>Сменить пароль</Button>
-							</div>
-						</div>
-						<div className="grid gap-3">
-							<Label htmlFor="email">Резервный Email</Label>
-							<InputGroup>
-								<InputGroupInput
-									type="email"
-									id="userEmail"
-									placeholder="Email"
-									defaultValue={"moon@emain.com"}
-									disabled
-								/>
-								<InputGroupAddon>
-									<MailIcon />
-								</InputGroupAddon>
-							</InputGroup>
-						</div>
+					<div className="grid grid-cols-1 gap-6">
 						<div>
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="2fa">
-										Многофакторная аутентификация
+										Пароль
 									</FieldLabel>
 									<FieldDescription>
-										Включите многофакторную аутентификацию.
-										При отсутствии устройства используйте
-										код из письма.
+										Последнее изменение: 12.12.2025
 									</FieldDescription>
 								</FieldContent>
-								<Switch id="2fa" />
-							</Field>
-						</div>
-					</div>
-				</CardContent>
-			</Card>
-			<Card>
-				<CardContent>
-					<h2 className="text-lg font-medium">Безопасность</h2>
-				</CardContent>
-				<CardContent>
-					<div className="grid grid-cols-1 gap-5">
-						<div className="flex justify-between gap-3">
-							<Label>Пароль</Label>
-
-							<Button variant="outline" size="sm">
-								Сменить
-							</Button>
-						</div>
-						<div className="flex justify-between gap-3">
-							<Label>Резервный Email</Label>
-							{(isAdditionalEmail && (
-								<div>air@email.com</div>
-							)) || (
-								<div className="text-muted-foreground">
-									Нет резервного Email
-								</div>
-							)}
-						</div>
-						<div className="flex justify-between gap-3">
-							<Label>Резервный Email</Label>
-							{(isAdditionalEmail && (
-								<div>air@email.com</div>
-							)) || (
-								<Button variant="outline" size="sm">
-									Добавить
-								</Button>
-							)}
-						</div>
-						<div className="flex justify-between gap-3">
-							<Label>Резервный Email</Label>
-
-							<div>air@email.com</div>
-						</div>
-						<div>
-							<Field orientation="horizontal">
-								<FieldContent>
-									<FieldLabel htmlFor="2fa">
-										Многофакторная аутентификация
-									</FieldLabel>
-									<FieldDescription>
-										Включите многофакторную аутентификацию.
-										При отсутствии устройства используйте
-										код из письма.
-									</FieldDescription>
-								</FieldContent>
-								<Switch id="2fa" />
-							</Field>
-						</div>
-					</div>
-				</CardContent>
-			</Card>
-			<Card>
-				<CardContent>
-					<h2 className="text-lg font-medium">Безопасность</h2>
-				</CardContent>
-				<CardContent>
-					<div className="grid grid-cols-1 gap-5">
-						<div className="flex justify-between gap-3">
-							<Label>Пароль</Label>
-
-							<Dialog>
-								<form>
-									<DialogTrigger asChild>
-										<Button variant="outline" size="sm">
-											Сменить
-										</Button>
-									</DialogTrigger>
-									<DialogContent className="sm:max-w-[425px]">
-										<DialogHeader>
-											<DialogTitle>
-												Смена пароля
-											</DialogTitle>
-											<DialogDescription>
-												Make changes to your profile
-												here. Click save when
-												you&apos;re done.
-											</DialogDescription>
-										</DialogHeader>
-										<div className="grid gap-4">
-											<div className="grid gap-3">
-												<Label htmlFor="name-1">
-													Name
-												</Label>
-												<Input
-													id="name-1"
-													name="name"
-													defaultValue="Pedro Duarte"
-												/>
-											</div>
-											<div className="grid gap-3">
-												<Label htmlFor="username-1">
-													Username
-												</Label>
-												<Input
-													id="username-1"
-													name="username"
-													defaultValue="@peduarte"
-												/>
-											</div>
-										</div>
-										<DialogFooter>
-											<DialogClose asChild>
-												<Button variant="outline">
-													Отмена
-												</Button>
-											</DialogClose>
-											<Button type="submit">
-												Сохранить пароль
+								<Dialog>
+									<form>
+										<DialogTrigger asChild>
+											<Button variant="outline" size="sm">
+												Сменить
 											</Button>
-										</DialogFooter>
-									</DialogContent>
-								</form>
-							</Dialog>
-						</div>
-
-						<div className="flex justify-between gap-3">
-							<Label>Резервный Email</Label>
-							{(isAdditionalEmail && (
-								<div>air@email.com</div>
-							)) || (
-								<Button variant="outline" size="sm">
-									Добавить
-								</Button>
-							)}
-						</div>
-
-						<div>
-							<Field orientation="horizontal">
-								<FieldContent>
-									<FieldLabel htmlFor="2fa">
-										Многофакторная аутентификация
-									</FieldLabel>
-									<FieldDescription>
-										Включите многофакторную аутентификацию.
-										При отсутствии устройства используйте
-										код из письма.
-									</FieldDescription>
-								</FieldContent>
-								<Switch id="2fa" />
+										</DialogTrigger>
+										<DialogContent className="sm:max-w-[425px]">
+											<DialogHeader>
+												<DialogTitle>
+													<div className="flex items-center gap-2">
+														<span
+															onClick={() =>
+																setIsVisiblePassword(
+																	!isVisiblePassword
+																)
+															}
+														>
+															{isVisiblePassword ? (
+																<Eye />
+															) : (
+																<EyeOff />
+															)}
+														</span>
+														Смена пароля
+													</div>
+												</DialogTitle>
+												<DialogDescription>
+													Смена пароля возможна только
+													1 раз в 24 часа.
+												</DialogDescription>
+											</DialogHeader>
+											<div className="grid gap-4">
+												<div className="grid gap-3">
+													<Label htmlFor="current_password">
+														Текущий пароль
+													</Label>
+													<InputGroup>
+														<InputGroupInput
+															type={
+																isVisiblePassword
+																	? "text"
+																	: "password"
+															}
+															id="current_password"
+															placeholder="Пароль"
+														/>
+													</InputGroup>
+												</div>
+												<div className="grid gap-3">
+													<Label htmlFor="new_password">
+														Новый пароль
+													</Label>
+													<InputGroup>
+														<InputGroupInput
+															type={
+																isVisiblePassword
+																	? "text"
+																	: "password"
+															}
+															id="new_password"
+															placeholder="Пароль"
+														/>
+													</InputGroup>
+												</div>
+												<div className="grid gap-3">
+													<Label htmlFor="repeat_new_password">
+														Повторите новый пароль
+													</Label>
+													<InputGroup>
+														<InputGroupInput
+															type={
+																isVisiblePassword
+																	? "text"
+																	: "password"
+															}
+															id="repeat_new_password"
+															placeholder="Пароль"
+														/>
+													</InputGroup>
+												</div>
+											</div>
+											<DialogFooter>
+												<DialogClose asChild>
+													<Button variant="outline">
+														Отмена
+													</Button>
+												</DialogClose>
+												<Button type="submit">
+													Сохранить пароль
+												</Button>
+											</DialogFooter>
+										</DialogContent>
+									</form>
+								</Dialog>
 							</Field>
 						</div>
-					</div>
-				</CardContent>
-			</Card>
-			<Card>
-				<CardContent>
-					<h2 className="text-lg font-medium">Безопасность</h2>
-				</CardContent>
-				<CardContent>
-					<div className="grid grid-cols-1 gap-5">
-						<div className="flex justify-between gap-3">
-							<Label>Пароль</Label>
 
-							<Dialog>
-								<form>
-									<DialogTrigger asChild>
-										<Button variant="outline" size="sm">
-											Сменить
-										</Button>
-									</DialogTrigger>
-									<DialogContent className="sm:max-w-[425px]">
-										<DialogHeader>
-											<DialogTitle>
-												Смена пароля
-											</DialogTitle>
-											<DialogDescription>
-												Make changes to your profile
-												here. Click save when
-												you&apos;re done.
-											</DialogDescription>
-										</DialogHeader>
-										<div className="grid gap-4">
-											<div className="grid gap-3">
-												<Label htmlFor="name-1">
-													Name
-												</Label>
-												<Input
-													id="name-1"
-													name="name"
-													defaultValue="Pedro Duarte"
-												/>
-											</div>
-											<div className="grid gap-3">
-												<Label htmlFor="username-1">
-													Username
-												</Label>
-												<Input
-													id="username-1"
-													name="username"
-													defaultValue="@peduarte"
-												/>
-											</div>
-										</div>
-										<DialogFooter>
-											<DialogClose asChild>
-												<Button variant="outline">
-													Отмена
-												</Button>
-											</DialogClose>
-											<Button type="submit">
-												Сохранить пароль
-											</Button>
-										</DialogFooter>
-									</DialogContent>
-								</form>
-							</Dialog>
-						</div>
-
-						<div className="flex justify-between gap-3">
-							<Label>Резервный Email</Label>
-							{(isAdditionalEmail && (
-								<div>air@email.com</div>
-							)) || (
-								<Button variant="outline" size="sm">
-									Добавить
-								</Button>
-							)}
-						</div>
 						<div>
 							<Field orientation="horizontal">
 								<FieldContent>
@@ -392,6 +257,7 @@ export default function Security() {
 								</Dialog>
 							</Field>
 						</div>
+
 						<div>
 							<Field orientation="horizontal">
 								<FieldContent>
@@ -402,9 +268,28 @@ export default function Security() {
 										Последнее изменение: 12.12.2025
 									</FieldDescription>
 								</FieldContent>
-								<div>air@email.com</div>
+
+								<DropdownMenu>
+									<DropdownMenuTrigger asChild>
+										<Button variant="secondary" size="sm">
+											air@email.com
+										</Button>
+									</DropdownMenuTrigger>
+									<DropdownMenuContent
+										align="end"
+										className="min-w-36"
+									>
+										<DropdownMenuItem>
+											Изменить
+										</DropdownMenuItem>
+										<DropdownMenuItem>
+											Удалить
+										</DropdownMenuItem>
+									</DropdownMenuContent>
+								</DropdownMenu>
 							</Field>
 						</div>
+
 						<div>
 							<Field orientation="horizontal">
 								<FieldContent>
@@ -418,6 +303,139 @@ export default function Security() {
 									</FieldDescription>
 								</FieldContent>
 								<Switch id="2fa" />
+							</Field>
+						</div>
+					</div>
+				</CardContent>
+				<CardContent>
+					<div className="flex items-center">
+						<h2 className="text-lg font-medium flex-1">
+							Активные сессии
+						</h2>
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button variant="ghost" size="icon-sm">
+									<Ellipsis className="size-4" />
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent
+								align="end"
+								className="min-w-36"
+							>
+								<DropdownMenuItem>
+									Завершить все кроме текущей
+								</DropdownMenuItem>
+								<DropdownMenuItem>
+									Завершить все
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					</div>
+				</CardContent>
+				<CardContent>
+					<div className="grid gap-4">
+						<div>
+							<Field orientation="horizontal">
+								<FieldContent>
+									<FieldLabel htmlFor="2fa">
+										<Computer className="size-4" />
+										Chrome на Windows
+										<Badge variant="outline">Текущая</Badge>
+									</FieldLabel>
+									<FieldDescription>
+										Москва, Россия · 192.168.1.25 ·
+										Активность: 1 минуту назад
+									</FieldDescription>
+								</FieldContent>
+								<Button variant="outline" size="sm" disabled>
+									Завершить
+								</Button>
+							</Field>
+						</div>
+						<Separator />
+						<div>
+							<Field orientation="horizontal">
+								<FieldContent>
+									<FieldLabel htmlFor="2fa">
+										<Smartphone className="size-4" />
+										Safari на iPhone 16
+									</FieldLabel>
+									<FieldDescription>
+										Санкт-Петербург, Россия · 192.168.1.40 ·
+										Активность: Вчера в 19:42
+									</FieldDescription>
+								</FieldContent>
+								<AlertDialog>
+									<AlertDialogTrigger asChild>
+										<Button variant="outline" size="sm">
+											Завершить
+										</Button>
+									</AlertDialogTrigger>
+									<AlertDialogContent>
+										<AlertDialogHeader>
+											<AlertDialogTitle>
+												Завершить сессию?
+											</AlertDialogTitle>
+											<AlertDialogDescription>
+												Вы уверены, что хотите завершить
+												эту сессию? После выхода
+												потребуется повторный вход на
+												этом устройстве.
+											</AlertDialogDescription>
+										</AlertDialogHeader>
+										<AlertDialogFooter>
+											<AlertDialogCancel>
+												Отмена
+											</AlertDialogCancel>
+											<AlertDialogAction>
+												Завершить
+											</AlertDialogAction>
+										</AlertDialogFooter>
+									</AlertDialogContent>
+								</AlertDialog>
+							</Field>
+						</div>
+						<Separator />
+						<div>
+							<Field orientation="horizontal">
+								<FieldContent>
+									<FieldLabel htmlFor="2fa">
+										<Computer className="size-4" />
+										Firefox на macOS
+									</FieldLabel>
+									<FieldDescription>
+										Новосибирск, Россия · 192.168.1.666 ·
+										Активность: 3 дня назад
+									</FieldDescription>
+								</FieldContent>
+								<AlertDialog>
+									<AlertDialogTrigger asChild>
+										<Button variant="outline" size="sm">
+											Завершить
+										</Button>
+									</AlertDialogTrigger>
+									<AlertDialogContent>
+										<AlertDialogHeader>
+											<AlertDialogTitle>
+												Завершить сессию?
+											</AlertDialogTitle>
+											<AlertDialogDescription>
+												Вы уверены, что хотите завершить
+												эту сессию? После выхода
+												потребуется повторный вход на
+												этом устройстве.
+											</AlertDialogDescription>
+										</AlertDialogHeader>
+										<AlertDialogFooter>
+											<AlertDialogCancel>
+												Отмена
+											</AlertDialogCancel>
+											<AlertDialogAction>
+												Завершить
+											</AlertDialogAction>
+										</AlertDialogFooter>
+									</AlertDialogContent>
+								</AlertDialog>
 							</Field>
 						</div>
 					</div>
