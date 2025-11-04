@@ -100,13 +100,20 @@ import { is } from "date-fns/locale";
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 export default function Security() {
-	const [isAdditionalEmail, setIsAdditionalEmail] = useState(false);
-	const [isVisiblePassword, setIsVisiblePassword] = useState(false);
-
-	const [isEmailSource, setIsEmailSource] = React.useState<Checked>(true);
-	const [isApplicationSource, setIsApplicationSource] =
+	// Channels
+	const [isEmailChannel, setIsEmailChannel] = React.useState<Checked>(true);
+	const [isApplicationChannel, setIsApplicationChannel] =
 		React.useState<Checked>(false);
-	const [isPushSource, setIsPushSource] = React.useState<Checked>(false);
+	const [isPushChannel, setIsPushChannel] = React.useState<Checked>(false);
+
+	// Sources
+	const [isTaskSource, setIsTaskSource] = React.useState<Checked>(true);
+	const [isCommentSource, setIsCommentSource] = React.useState<Checked>(true);
+	const [isEmployeeSource, setIsEmployeeSource] =
+		React.useState<Checked>(true);
+	const [isProjectSource, setIsProjectSource] = React.useState<Checked>(true);
+	const [isProcessSource, setIsProcessSource] = React.useState<Checked>(true);
+
 	return (
 		<div className="grid gap-5">
 			<Card>
@@ -119,15 +126,15 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="notification_source">
-										Источники уведомлений
+										Каналы уведомлений
 									</FieldLabel>
 									<FieldDescription>
-										Текущие: {isEmailSource && "Email, "}
-										{isApplicationSource && "Приложение, "}
-										{isPushSource && "Push-уведомления"}
-										{!isEmailSource &&
-											!isApplicationSource &&
-											!isPushSource &&
+										Текущие: {isEmailChannel && "Email, "}
+										{isApplicationChannel && "Приложение, "}
+										{isPushChannel && "Push-уведомления"}
+										{!isEmailChannel &&
+											!isApplicationChannel &&
+											!isPushChannel &&
 											"Нет"}
 									</FieldDescription>
 								</FieldContent>
@@ -138,14 +145,206 @@ export default function Security() {
 											className="font-normal"
 											size={"sm"}
 										>
-											{(!isEmailSource &&
-												!isApplicationSource &&
-												!isPushSource &&
+											{(!isEmailChannel &&
+												!isApplicationChannel &&
+												!isPushChannel &&
 												"Отключено") ||
 												"Всего: " +
-													(+isEmailSource +
-														+isApplicationSource +
-														+isPushSource)}
+													(+isEmailChannel +
+														+isApplicationChannel +
+														+isPushChannel)}
+											<ChevronDown className="text-muted-foreground/50" />
+										</Button>
+									</DropdownMenuTrigger>
+									<DropdownMenuContent
+										className="min-w-56"
+										align={"end"}
+									>
+										<DropdownMenuLabel>
+											Каналы
+										</DropdownMenuLabel>
+										<DropdownMenuSeparator />
+										<DropdownMenuCheckboxItem
+											checked={isEmailChannel}
+											onCheckedChange={setIsEmailChannel}
+											onSelect={(e) => e.preventDefault()}
+										>
+											Email
+										</DropdownMenuCheckboxItem>
+										<DropdownMenuCheckboxItem
+											checked={isApplicationChannel}
+											onCheckedChange={
+												setIsApplicationChannel
+											}
+											onSelect={(e) => e.preventDefault()}
+										>
+											Приложение
+										</DropdownMenuCheckboxItem>
+										<DropdownMenuCheckboxItem
+											checked={isPushChannel}
+											onCheckedChange={setIsPushChannel}
+											onSelect={(e) => e.preventDefault()}
+										>
+											Push-уведомления
+										</DropdownMenuCheckboxItem>
+									</DropdownMenuContent>
+								</DropdownMenu>
+							</Field>
+						</div>
+						<div>
+							<Field orientation="horizontal">
+								<FieldContent>
+									<FieldLabel htmlFor="notification_source">
+										Каналы уведомлений
+									</FieldLabel>
+									<FieldDescription>
+										Текущие: {isEmailChannel && "Email, "}
+										{isApplicationChannel && "Приложение, "}
+										{isPushChannel && "Push-уведомления"}
+										{!isEmailChannel &&
+											!isApplicationChannel &&
+											!isPushChannel &&
+											"Нет"}
+									</FieldDescription>
+								</FieldContent>
+								<DropdownMenu>
+									<DropdownMenuTrigger asChild>
+										<Button
+											variant="outline"
+											className="font-normal"
+											size={"sm"}
+										>
+											{(!isEmailChannel &&
+												!isApplicationChannel &&
+												!isPushChannel &&
+												"Отключено") ||
+												"Выбрано: " +
+													(+isEmailChannel +
+														+isApplicationChannel +
+														+isPushChannel)}
+											<ChevronDown className="text-muted-foreground/50" />
+										</Button>
+									</DropdownMenuTrigger>
+									<DropdownMenuContent
+										className="min-w-56"
+										align={"end"}
+									>
+										<DropdownMenuLabel>
+											Каналы
+										</DropdownMenuLabel>
+										<DropdownMenuSeparator />
+										<DropdownMenuItem
+											onSelect={(e) => e.preventDefault()}
+										>
+											<Field orientation="horizontal">
+												<FieldContent>
+													<FieldLabel
+														htmlFor="notification_email"
+														className="font-normal"
+													>
+														Email
+													</FieldLabel>
+												</FieldContent>
+												{/* Добавьте checked и onCheckedChange к Switch */}
+												<Switch
+													id="notification_email"
+													checked={isEmailChannel}
+													onCheckedChange={
+														setIsEmailChannel
+													}
+												/>
+											</Field>
+										</DropdownMenuItem>
+										<DropdownMenuItem
+											onSelect={(e) => e.preventDefault()}
+										>
+											<Field orientation="horizontal">
+												<FieldContent>
+													<FieldLabel
+														htmlFor="notification_app"
+														className="font-normal"
+													>
+														Приложение
+													</FieldLabel>
+												</FieldContent>
+												{/* Добавьте checked и onCheckedChange к Switch */}
+												<Switch
+													id="notification_app"
+													checked={
+														isApplicationChannel
+													}
+													onCheckedChange={
+														setIsApplicationChannel
+													}
+												/>
+											</Field>
+										</DropdownMenuItem>
+										<DropdownMenuItem
+											onSelect={(e) => e.preventDefault()}
+										>
+											<Field orientation="horizontal">
+												<FieldContent>
+													<FieldLabel
+														htmlFor="notification_push"
+														className="font-normal"
+													>
+														Push
+													</FieldLabel>
+												</FieldContent>
+												{/* Добавьте checked и onCheckedChange к Switch */}
+												<Switch
+													id="notification_push"
+													checked={isPushChannel}
+													onCheckedChange={
+														setIsPushChannel
+													}
+												/>
+											</Field>
+										</DropdownMenuItem>
+									</DropdownMenuContent>
+								</DropdownMenu>
+							</Field>
+						</div>
+
+						<div>
+							<Field orientation="horizontal">
+								<FieldContent>
+									<FieldLabel htmlFor="notification_source">
+										Источники уведомлений
+									</FieldLabel>
+									<FieldDescription>
+										Текущие: {isTaskSource && "Задачи, "}
+										{isEmployeeSource && "Сотрудники, "}
+										{isCommentSource && "Комментарии, "}
+										{isProjectSource && "Проекты, "}
+										{isProcessSource && "Процессы, "}
+										{!isTaskSource &&
+											!isEmployeeSource &&
+											!isCommentSource &&
+											!isProjectSource &&
+											!isProcessSource &&
+											"Нет"}
+									</FieldDescription>
+								</FieldContent>
+								<DropdownMenu>
+									<DropdownMenuTrigger asChild>
+										<Button
+											variant="outline"
+											className="font-normal"
+											size={"sm"}
+										>
+											{(!isTaskSource &&
+												!isEmployeeSource &&
+												!isCommentSource &&
+												!isProjectSource &&
+												!isProcessSource &&
+												"Отключено") ||
+												"Выбрано: " +
+													(+isTaskSource +
+														+isEmployeeSource +
+														+isCommentSource +
+														+isProjectSource +
+														+isProcessSource)}
 											<ChevronDown className="text-muted-foreground/50" />
 										</Button>
 									</DropdownMenuTrigger>
@@ -157,26 +356,116 @@ export default function Security() {
 											Источники
 										</DropdownMenuLabel>
 										<DropdownMenuSeparator />
-										<DropdownMenuCheckboxItem
-											checked={isEmailSource}
-											onCheckedChange={setIsEmailSource}
+										<DropdownMenuItem
+											onSelect={(e) => e.preventDefault()}
 										>
-											Email
-										</DropdownMenuCheckboxItem>
-										<DropdownMenuCheckboxItem
-											checked={isApplicationSource}
-											onCheckedChange={
-												setIsApplicationSource
-											}
+											<Field orientation="horizontal">
+												<FieldContent>
+													<FieldLabel
+														htmlFor="notification_task"
+														className="font-normal"
+													>
+														Задачи
+													</FieldLabel>
+												</FieldContent>
+												{/* Добавьте checked и onCheckedChange к Switch */}
+												<Switch
+													id="notification_task"
+													checked={isTaskSource}
+													onCheckedChange={
+														setIsTaskSource
+													}
+												/>
+											</Field>
+										</DropdownMenuItem>
+										<DropdownMenuItem
+											onSelect={(e) => e.preventDefault()}
 										>
-											Приложение
-										</DropdownMenuCheckboxItem>
-										<DropdownMenuCheckboxItem
-											checked={isPushSource}
-											onCheckedChange={setIsPushSource}
+											<Field orientation="horizontal">
+												<FieldContent>
+													<FieldLabel
+														htmlFor="notification_employee"
+														className="font-normal"
+													>
+														Сотрудники
+													</FieldLabel>
+												</FieldContent>
+												{/* Добавьте checked и onCheckedChange к Switch */}
+												<Switch
+													id="notification_employee"
+													checked={isEmployeeSource}
+													onCheckedChange={
+														setIsEmployeeSource
+													}
+												/>
+											</Field>
+										</DropdownMenuItem>
+										<DropdownMenuItem
+											onSelect={(e) => e.preventDefault()}
 										>
-											Push-уведомления
-										</DropdownMenuCheckboxItem>
+											<Field orientation="horizontal">
+												<FieldContent>
+													<FieldLabel
+														htmlFor="notification_comment"
+														className="font-normal"
+													>
+														Комментарии
+													</FieldLabel>
+												</FieldContent>
+												{/* Добавьте checked и onCheckedChange к Switch */}
+												<Switch
+													id="notification_comment"
+													checked={isCommentSource}
+													onCheckedChange={
+														setIsCommentSource
+													}
+												/>
+											</Field>
+										</DropdownMenuItem>
+										<DropdownMenuItem
+											onSelect={(e) => e.preventDefault()}
+										>
+											<Field orientation="horizontal">
+												<FieldContent>
+													<FieldLabel
+														htmlFor="notification_project"
+														className="font-normal"
+													>
+														Проекты
+													</FieldLabel>
+												</FieldContent>
+												{/* Добавьте checked и onCheckedChange к Switch */}
+												<Switch
+													id="notification_project"
+													checked={isProjectSource}
+													onCheckedChange={
+														setIsProjectSource
+													}
+												/>
+											</Field>
+										</DropdownMenuItem>
+										<DropdownMenuItem
+											onSelect={(e) => e.preventDefault()}
+										>
+											<Field orientation="horizontal">
+												<FieldContent>
+													<FieldLabel
+														htmlFor="notification_process"
+														className="font-normal"
+													>
+														Процессы
+													</FieldLabel>
+												</FieldContent>
+												{/* Добавьте checked и onCheckedChange к Switch */}
+												<Switch
+													id="notification_process"
+													checked={isProcessSource}
+													onCheckedChange={
+														setIsProcessSource
+													}
+												/>
+											</Field>
+										</DropdownMenuItem>
 									</DropdownMenuContent>
 								</DropdownMenu>
 							</Field>
@@ -196,95 +485,9 @@ export default function Security() {
 								</FieldContent>
 								<Select defaultValue={"instant"}>
 									<SelectTrigger
-										className="w-auto"
+										className="w-auto hover:bg-accent"
 										size={"sm"}
 									>
-										<SelectValue placeholder="Уведомления" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectGroup>
-											<SelectItem value="instant">
-												Мгновенно
-											</SelectItem>
-											<SelectItem value="hourly">
-												Ежечасно
-											</SelectItem>
-											<SelectItem value="daily">
-												Ежедневно
-											</SelectItem>
-											<SelectItem value="weekly">
-												Еженедельно
-											</SelectItem>
-										</SelectGroup>
-									</SelectContent>
-								</Select>
-							</Field>
-						</div>
-					</div>
-				</CardContent>
-			</Card>
-			<Card>
-				<CardContent>
-					<h2 className="text-lg font-medium">Уведомления</h2>
-				</CardContent>
-				<CardContent>
-					<div className="grid grid-cols-1 gap-6">
-						<div>
-							<Field orientation="horizontal">
-								<FieldContent>
-									<FieldLabel htmlFor="notification_email">
-										Уведомления по почте.
-									</FieldLabel>
-									<FieldDescription>
-										Получайте важные уведомления и
-										обновления на вашу электронную почту.
-									</FieldDescription>
-								</FieldContent>
-								<Switch id="notification_email" />
-							</Field>
-						</div>
-						<div>
-							<Field orientation="horizontal">
-								<FieldContent>
-									<FieldLabel htmlFor="notification_app">
-										Уведомления внутри приложения
-									</FieldLabel>
-									<FieldDescription>
-										Получайте важные уведомления и
-										обновления внутри приложения.
-									</FieldDescription>
-								</FieldContent>
-								<Switch id="notification_app" />
-							</Field>
-						</div>
-						<div>
-							<Field orientation="horizontal">
-								<FieldContent>
-									<FieldLabel htmlFor="notification_push">
-										Push-уведомления.
-									</FieldLabel>
-									<FieldDescription>
-										Получайте важные уведомления и
-										обновления через push-уведомления.
-									</FieldDescription>
-								</FieldContent>
-								<Switch id="notification_push" />
-							</Field>
-						</div>
-						<Separator />
-						<div>
-							<Field orientation="horizontal">
-								<FieldContent>
-									<FieldLabel htmlFor="notification_push">
-										Частота уведомлений
-									</FieldLabel>
-									<FieldDescription>
-										Выберите, как часто получать уведомления
-										и обновления
-									</FieldDescription>
-								</FieldContent>
-								<Select defaultValue={"instant"}>
-									<SelectTrigger className="w-auto">
 										<SelectValue placeholder="Уведомления" />
 									</SelectTrigger>
 									<SelectContent>
