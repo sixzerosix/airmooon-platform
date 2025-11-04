@@ -31,6 +31,7 @@ import {
 	Cpu,
 	SquareChartGantt,
 	History,
+	Bell,
 } from "lucide-react";
 
 import {
@@ -56,7 +57,7 @@ const items = [
 	},
 	{
 		title: "Астивность",
-		url: "#",
+		url: "/activity",
 		icon: History,
 	},
 	{
@@ -68,6 +69,11 @@ const items = [
 		title: "Отчёты",
 		url: "#",
 		icon: SquareChartGantt,
+	},
+	{
+		title: "Уведомления",
+		url: "#",
+		icon: Bell,
 	},
 	{
 		title: "Продукты",
