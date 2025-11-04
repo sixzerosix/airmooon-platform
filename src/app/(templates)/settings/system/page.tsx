@@ -87,22 +87,6 @@ const appPages = [
 	},
 ];
 
-const timezones = [
-	{ value: "Pacific/Midway", label: "UTC−11:00 (Midway, Самоа)" },
-	{
-		value: "America/Los_Angeles",
-		label: "UTC−08:00 (Лос-Анджелес, Ванкувер)",
-	},
-	{ value: "America/New_York", label: "UTC−05:00 (Нью-Йорк, Торонто)" },
-	{ value: "Europe/London", label: "UTC±00:00 (Лондон, Лиссабон)" },
-	{ value: "Europe/Berlin", label: "UTC+01:00 (Берлин, Париж)" },
-	{ value: "Europe/Moscow", label: "UTC+03:00 (Москва, Минск)" },
-	{ value: "Asia/Bangkok", label: "UTC+07:00 (Бангкок, Хошимин)" },
-	{ value: "Asia/Tokyo", label: "UTC+09:00 (Токио, Сеул)" },
-	{ value: "Australia/Sydney", label: "UTC+10:00 (Сидней, Владивосток)" },
-	{ value: "Pacific/Auckland", label: "UTC+12:00 (Окленд, Фиджи)" },
-];
-
 export default function Security() {
 	// Theme
 	const { setTheme, theme } = useTheme();
@@ -111,23 +95,60 @@ export default function Security() {
 	const [open, setOpen] = React.useState(false);
 	const [value, setValue] = React.useState("");
 
+	const [label, setLabel] = useState("");
+
 	// Timezone
 	const [timezone, setTimezone] = useState<string>("");
 
 	// Is Loaded
-	const [isLoaded, setIsLoaded] = useState(false);
+	// const [isLoaded, setIsLoaded] = useState(false);
+
+	const timezones = [
+		{ value: "Auto", label: "Авто определение" },
+		{ value: "Pacific/Midway", label: "UTC−11:00 (Midway, Самоа)" },
+		{
+			value: "America/Los_Angeles",
+			label: "UTC−08:00 (Лос-Анджелес, Ванкувер)",
+		},
+		{ value: "America/New_York", label: "UTC−05:00 (Нью-Йорк)" },
+		{ value: "Europe/London", label: "UTC±00:00 (Лондон)" },
+		{ value: "Europe/Berlin", label: "UTC+01:00 (Париж)" },
+		{ value: "Europe/Moscow", label: "UTC+03:00 (Москва)" },
+		{ value: "Asia/Bangkok", label: "UTC+07:00 (Бангкок)" },
+		{ value: "Asia/Tokyo", label: "UTC+09:00 (Токио)" },
+		{ value: "Australia/Sydney", label: "UTC+10:00 (Владивосток)" },
+		{ value: "Pacific/Auckland", label: "UTC+12:00 (Фиджи)" },
+	];
 
 	useEffect(() => {
-		try {
-			const current = Intl.DateTimeFormat().resolvedOptions().timeZone;
-			setTimezone(current);
-		} catch (error) {
-			console.error("Failed to get timezone:", error);
-			setTimezone("Europe/Moscow");
-		} finally {
-			setIsLoaded(true);
+		const saved = localStorage.getItem("user-timezone");
+
+		// Если сохранено “Auto” — определяем по системе
+		if (saved === "Auto" || !saved) {
+			const systemTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+			setTimezone("Auto");
+			setLabel(`Автоматически (${systemTZ})`);
+			localStorage.setItem("user-timezone", "Auto");
+		} else {
+			setTimezone(saved);
+			const tz = timezones.find((t) => t.value === saved);
+			if (tz) setLabel(tz.label);
 		}
 	}, []);
+
+	const handleTimezoneChange = (value: string) => {
+		if (value === "Auto") {
+			const systemTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+			setTimezone("Auto");
+			setLabel(`Автоматически (${systemTZ})`);
+			localStorage.setItem("user-timezone", "Auto");
+		} else {
+			setTimezone(value);
+			const tz = timezones.find((t) => t.value === value);
+			setLabel(tz ? tz.label : "");
+			localStorage.setItem("user-timezone", value);
+		}
+	};
 
 	// if (!isLoaded) {
 	// 	return (
@@ -237,16 +258,18 @@ export default function Security() {
 										Часовой пояс
 									</FieldLabel>
 									<FieldDescription>
-										Выберите, на каком языке отображать
-										интерфейс
+										{label &&
+											"Текущий часовой пояс: " + label}
 									</FieldDescription>
 								</FieldContent>
 								<Select
-									defaultValue={timezone}
-									onValueChange={setTimezone}
+									value={timezone}
+									onValueChange={handleTimezoneChange}
 								>
 									<SelectTrigger size={"sm"}>
-										<SelectValue placeholder="Выберите часовой пояс" />
+										<SelectValue
+											placeholder={label && label}
+										/>
 									</SelectTrigger>
 									<SelectContent align={"end"}>
 										<SelectGroup>
