@@ -92,10 +92,13 @@ import {
 	Smartphone,
 	EllipsisVertical,
 	Ellipsis,
+	Split,
+	Cable,
+	Network,
 	ChevronDown,
+	ClockFading,
 } from "lucide-react";
 import React from "react";
-import { is } from "date-fns/locale";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
@@ -195,6 +198,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="notification_source">
+										<Split className="size-4" />
 										Каналы уведомлений
 									</FieldLabel>
 									<FieldDescription>
@@ -310,6 +314,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="notification_source">
+										<Cable className="size-4" />
 										Источники уведомлений
 									</FieldLabel>
 									<FieldDescription>
@@ -476,6 +481,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="notification_push">
+										<ClockFading className="size-4" />
 										Частота уведомлений
 									</FieldLabel>
 									<FieldDescription>

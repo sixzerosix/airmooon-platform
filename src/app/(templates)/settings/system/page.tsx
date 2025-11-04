@@ -42,7 +42,18 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { Languages, SunMoon, ChevronDown, Check } from "lucide-react";
+import {
+	Languages,
+	SunMoon,
+	ChevronDown,
+	Check,
+	Sun,
+	Moon,
+	Globe,
+	Calendar1,
+	Clock12,
+	BookHeart,
+} from "lucide-react";
 
 interface Timezone {
 	value: string;
@@ -241,7 +252,13 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="notification_push">
-										<SunMoon className="size-4" />
+										{theme === "system" ? (
+											<SunMoon className="size-4" />
+										) : theme === "light" ? (
+											<Sun className="size-4" />
+										) : (
+											<Moon className="size-4" />
+										)}
 										Тема
 									</FieldLabel>
 									<FieldDescription>
@@ -286,7 +303,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="notification_push">
-										<SunMoon className="size-4" />
+										<Globe className="size-4" />
 										Часовой пояс
 									</FieldLabel>
 									<FieldDescription>
@@ -322,6 +339,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="notification_push">
+										<Calendar1 className="size-4" />
 										Формат даты
 									</FieldLabel>
 									<FieldDescription>
@@ -362,6 +380,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="system_time_format">
+										<Clock12 className="size-4" />
 										Формат времени
 									</FieldLabel>
 									<FieldDescription>
@@ -397,6 +416,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="notification_push">
+										<BookHeart className="size-4" />
 										Начальная страница
 									</FieldLabel>
 									<FieldDescription>

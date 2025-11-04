@@ -78,6 +78,9 @@ import {
 	Smartphone,
 	EllipsisVertical,
 	Ellipsis,
+	KeyRound,
+	Mail,
+	Fingerprint,
 } from "lucide-react";
 
 export default function Security() {
@@ -95,6 +98,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="2fa">
+										<KeyRound className="size-4" />
 										Пароль
 									</FieldLabel>
 									<FieldDescription>
@@ -203,6 +207,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="2fa">
+										<Mail className="size-4" />
 										Резервный Email
 									</FieldLabel>
 									<FieldDescription>
@@ -262,6 +267,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="2fa">
+										<Mail className="size-4" />
 										Резервный Email
 									</FieldLabel>
 									<FieldDescription>
@@ -294,6 +300,7 @@ export default function Security() {
 							<Field orientation="horizontal">
 								<FieldContent>
 									<FieldLabel htmlFor="2fa">
+										<Fingerprint className="size-4" />
 										Многофакторная аутентификация
 									</FieldLabel>
 									<FieldDescription>
