@@ -14,6 +14,7 @@ import {
 	ShieldCheck,
 	Bell,
 	UserRound,
+	AppWindow,
 } from "lucide-react";
 
 import {
@@ -46,6 +47,11 @@ const items = [
 		title: "Аккаунт",
 		url: "/settings/account",
 		icon: UserRound,
+	},
+	{
+		title: "Система",
+		url: "/settings/system",
+		icon: AppWindow,
 	},
 	{
 		title: "Профиль",

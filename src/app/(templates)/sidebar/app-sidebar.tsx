@@ -29,6 +29,8 @@ import {
 	Landmark,
 	Dna,
 	Cpu,
+	SquareChartGantt,
+	History,
 } from "lucide-react";
 
 import {
@@ -53,9 +55,19 @@ const items = [
 		icon: Home,
 	},
 	{
+		title: "Астивность",
+		url: "#",
+		icon: History,
+	},
+	{
 		title: "Компания",
 		url: "#",
 		icon: Building2,
+	},
+	{
+		title: "Отчёты",
+		url: "#",
+		icon: SquareChartGantt,
 	},
 	{
 		title: "Продукты",

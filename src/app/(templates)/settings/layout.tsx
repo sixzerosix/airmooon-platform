@@ -1,6 +1,6 @@
 import { Main, Section, Container } from "@/components/layouts";
 import { Card, CardContent } from "@/components/ui/card";
-import { SettingsSidebar } from "./settingsSidebar";
+import { SettingsSidebar } from "./settings-sidebar";
 
 export default function SettingsLayout({
 	children,
