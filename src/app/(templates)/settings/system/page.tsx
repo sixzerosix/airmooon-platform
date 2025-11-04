@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,6 +26,13 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 import { Separator } from "@/components/ui/separator";
 
 import {
@@ -42,6 +50,11 @@ import {
 } from "@/components/ui/popover";
 
 import { Languages, SunMoon, ChevronDown, Check } from "lucide-react";
+
+interface Timezone {
+	value: string;
+	label: string;
+}
 
 const appPages = [
 	{
@@ -74,10 +87,53 @@ const appPages = [
 	},
 ];
 
+const timezones = [
+	{ value: "Pacific/Midway", label: "UTC−11:00 (Midway, Самоа)" },
+	{
+		value: "America/Los_Angeles",
+		label: "UTC−08:00 (Лос-Анджелес, Ванкувер)",
+	},
+	{ value: "America/New_York", label: "UTC−05:00 (Нью-Йорк, Торонто)" },
+	{ value: "Europe/London", label: "UTC±00:00 (Лондон, Лиссабон)" },
+	{ value: "Europe/Berlin", label: "UTC+01:00 (Берлин, Париж)" },
+	{ value: "Europe/Moscow", label: "UTC+03:00 (Москва, Минск)" },
+	{ value: "Asia/Bangkok", label: "UTC+07:00 (Бангкок, Хошимин)" },
+	{ value: "Asia/Tokyo", label: "UTC+09:00 (Токио, Сеул)" },
+	{ value: "Australia/Sydney", label: "UTC+10:00 (Сидней, Владивосток)" },
+	{ value: "Pacific/Auckland", label: "UTC+12:00 (Окленд, Фиджи)" },
+];
+
 export default function Security() {
+	// Theme
+	const { setTheme, theme } = useTheme();
+
 	// Channels
 	const [open, setOpen] = React.useState(false);
 	const [value, setValue] = React.useState("");
+
+	// Timezone
+	const [timezone, setTimezone] = useState<string>("");
+
+	// Is Loaded
+	const [isLoaded, setIsLoaded] = useState(false);
+
+	useEffect(() => {
+		try {
+			const current = Intl.DateTimeFormat().resolvedOptions().timeZone;
+			setTimezone(current);
+		} catch (error) {
+			console.error("Failed to get timezone:", error);
+			setTimezone("Europe/Moscow");
+		} finally {
+			setIsLoaded(true);
+		}
+	}, []);
+
+	// if (!isLoaded) {
+	// 	return (
+	// 		<div className="max-w-xs h-10 bg-gray-200 rounded animate-pulse" />
+	// 	);
+	// }
 
 	return (
 		<div className="grid gap-5">
@@ -106,7 +162,10 @@ export default function Security() {
 									>
 										<SelectValue placeholder="Уведомления" />
 									</SelectTrigger>
-									<SelectContent>
+									<SelectContent
+										className="w-52"
+										align={"end"}
+									>
 										<SelectGroup>
 											<SelectItem value="instant">
 												Мгновенно
@@ -137,32 +196,39 @@ export default function Security() {
 										интерфейс
 									</FieldDescription>
 								</FieldContent>
-								<Select defaultValue={"instant"}>
+								<Select
+									defaultValue={theme || "system"}
+									onValueChange={(value) => setTheme(value)}
+								>
 									<SelectTrigger
 										className="w-auto hover:bg-accent"
 										size={"sm"}
 									>
-										<SelectValue placeholder="Уведомления" />
+										<SelectValue placeholder="Тема" />
 									</SelectTrigger>
-									<SelectContent>
+									<SelectContent
+										className="w-52"
+										align={"end"}
+									>
 										<SelectGroup>
-											<SelectItem value="instant">
-												Мгновенно
+											<SelectItem value="light">
+												Светлая
 											</SelectItem>
-											<SelectItem value="hourly">
-												Ежечасно
+											<SelectItem value="dark">
+												Тёмная
 											</SelectItem>
-											<SelectItem value="daily">
-												Ежедневно
-											</SelectItem>
-											<SelectItem value="weekly">
-												Еженедельно
+											<SelectItem
+												// Удалите onChange отсюда
+												value="system"
+											>
+												Системная
 											</SelectItem>
 										</SelectGroup>
 									</SelectContent>
 								</Select>
 							</Field>
 						</div>
+						<Separator />
 						<div>
 							<Field orientation="horizontal">
 								<FieldContent>
@@ -175,27 +241,23 @@ export default function Security() {
 										интерфейс
 									</FieldDescription>
 								</FieldContent>
-								<Select defaultValue={"instant"}>
-									<SelectTrigger
-										className="w-auto hover:bg-accent"
-										size={"sm"}
-									>
-										<SelectValue placeholder="Уведомления" />
+								<Select
+									defaultValue={timezone}
+									onValueChange={setTimezone}
+								>
+									<SelectTrigger size={"sm"}>
+										<SelectValue placeholder="Выберите часовой пояс" />
 									</SelectTrigger>
-									<SelectContent>
+									<SelectContent align={"end"}>
 										<SelectGroup>
-											<SelectItem value="instant">
-												Мгновенно
-											</SelectItem>
-											<SelectItem value="hourly">
-												Ежечасно
-											</SelectItem>
-											<SelectItem value="daily">
-												Ежедневно
-											</SelectItem>
-											<SelectItem value="weekly">
-												Еженедельно
-											</SelectItem>
+											{timezones.map((tz) => (
+												<SelectItem
+													key={tz.value}
+													value={tz.value}
+												>
+													{tz.label}
+												</SelectItem>
+											))}
 										</SelectGroup>
 									</SelectContent>
 								</Select>
@@ -219,7 +281,10 @@ export default function Security() {
 									>
 										<SelectValue placeholder="Уведомления" />
 									</SelectTrigger>
-									<SelectContent>
+									<SelectContent
+										className="w-52"
+										align={"end"}
+									>
 										<SelectGroup>
 											<SelectItem value="instant">
 												Мгновенно
@@ -241,7 +306,7 @@ export default function Security() {
 						<div>
 							<Field orientation="horizontal">
 								<FieldContent>
-									<FieldLabel htmlFor="notification_push">
+									<FieldLabel htmlFor="system_time_format">
 										Формат времени
 									</FieldLabel>
 									<FieldDescription>
@@ -249,26 +314,30 @@ export default function Security() {
 										интерфейс
 									</FieldDescription>
 								</FieldContent>
-								<Select defaultValue={"instant"}>
+								<Select defaultValue={"hourly"}>
 									<SelectTrigger
 										className="w-auto hover:bg-accent"
 										size={"sm"}
 									>
 										<SelectValue placeholder="Уведомления" />
 									</SelectTrigger>
-									<SelectContent>
+									<SelectContent
+										className="w-52"
+										align={"end"}
+									>
 										<SelectGroup>
-											<SelectItem value="instant">
-												12 часов
-											</SelectItem>
 											<SelectItem value="hourly">
 												24 часа
+											</SelectItem>
+											<SelectItem value="instant">
+												12 часов
 											</SelectItem>
 										</SelectGroup>
 									</SelectContent>
 								</Select>
 							</Field>
 						</div>
+						<Separator />
 						<div>
 							<Field orientation="horizontal">
 								<FieldContent>
@@ -301,7 +370,7 @@ export default function Security() {
 										</Button>
 									</PopoverTrigger>
 									<PopoverContent
-										className="max-w-56 p-0"
+										className="max-w-52 p-0"
 										align={"end"}
 									>
 										<Command>
@@ -357,7 +426,6 @@ export default function Security() {
 								</Popover>
 							</Field>
 						</div>
-						<Separator />
 					</div>
 				</CardContent>
 			</Card>
