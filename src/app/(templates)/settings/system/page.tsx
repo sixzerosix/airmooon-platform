@@ -26,13 +26,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
 import { Separator } from "@/components/ui/separator";
 
 import {
@@ -87,6 +80,36 @@ const appPages = [
 	},
 ];
 
+const timezones = [
+	{ value: "Auto", label: "Авто определение" },
+	{ value: "Pacific/Midway", label: "UTC−11:00 (Midway, Самоа)" },
+	{
+		value: "America/Los_Angeles",
+		label: "UTC−08:00 (Лос-Анджелес, Ванкувер)",
+	},
+	{ value: "America/New_York", label: "UTC−05:00 (Нью-Йорк)" },
+	{ value: "Europe/London", label: "UTC±00:00 (Лондон)" },
+	{ value: "Europe/Berlin", label: "UTC+01:00 (Париж)" },
+	{ value: "Europe/Moscow", label: "UTC+03:00 (Москва)" },
+	{ value: "Asia/Bangkok", label: "UTC+07:00 (Бангкок)" },
+	{ value: "Asia/Tokyo", label: "UTC+09:00 (Токио)" },
+	{ value: "Australia/Sydney", label: "UTC+10:00 (Владивосток)" },
+	{ value: "Pacific/Auckland", label: "UTC+12:00 (Фиджи)" },
+];
+
+const languages = [
+	{ value: "ru", label: "Русский" },
+	{ value: "en", label: "Английский" },
+	{ value: "de", label: "Немецкий" },
+	{ value: "ja", label: "Японский" },
+	{ value: "es", label: "Испанский" },
+	{ value: "fr", label: "Французский" },
+	{ value: "zh", label: "Китайский" },
+	{ value: "pt", label: "Португальский" },
+	{ value: "ar", label: "Арабский" },
+	{ value: "hi", label: "Хинди" },
+];
+
 export default function Security() {
 	// Theme
 	const { setTheme, theme } = useTheme();
@@ -102,23 +125,6 @@ export default function Security() {
 
 	// Is Loaded
 	// const [isLoaded, setIsLoaded] = useState(false);
-
-	const timezones = [
-		{ value: "Auto", label: "Авто определение" },
-		{ value: "Pacific/Midway", label: "UTC−11:00 (Midway, Самоа)" },
-		{
-			value: "America/Los_Angeles",
-			label: "UTC−08:00 (Лос-Анджелес, Ванкувер)",
-		},
-		{ value: "America/New_York", label: "UTC−05:00 (Нью-Йорк)" },
-		{ value: "Europe/London", label: "UTC±00:00 (Лондон)" },
-		{ value: "Europe/Berlin", label: "UTC+01:00 (Париж)" },
-		{ value: "Europe/Moscow", label: "UTC+03:00 (Москва)" },
-		{ value: "Asia/Bangkok", label: "UTC+07:00 (Бангкок)" },
-		{ value: "Asia/Tokyo", label: "UTC+09:00 (Токио)" },
-		{ value: "Australia/Sydney", label: "UTC+10:00 (Владивосток)" },
-		{ value: "Pacific/Auckland", label: "UTC+12:00 (Фиджи)" },
-	];
 
 	useEffect(() => {
 		const saved = localStorage.getItem("user-timezone");
@@ -150,6 +156,33 @@ export default function Security() {
 		}
 	};
 
+	const [language, setLanguage] = useState("Auto");
+
+	useEffect(() => {
+		// 1️⃣ Проверяем, есть ли сохранённый язык
+		const savedLang = localStorage.getItem("app_language");
+
+		if (savedLang && languages.some((lang) => lang.value === savedLang)) {
+			setLanguage(savedLang);
+			return;
+		}
+
+		// 2️⃣ Определяем язык системы
+		const userLang = (
+			navigator.language ||
+			navigator.userLanguage ||
+			"en"
+		).split("-")[0];
+		const found = languages.find((lang) => lang.value === userLang);
+		setLanguage(found ? found.value : "en");
+	}, []);
+
+	// 3️⃣ При изменении сохраняем выбор
+	const handleLanguageChange = (value: string) => {
+		setLanguage(value);
+		localStorage.setItem("app_language", value);
+	};
+
 	// if (!isLoaded) {
 	// 	return (
 	// 		<div className="max-w-xs h-10 bg-gray-200 rounded animate-pulse" />
@@ -176,7 +209,10 @@ export default function Security() {
 										интерфейс
 									</FieldDescription>
 								</FieldContent>
-								<Select defaultValue={"instant"}>
+								<Select
+									value={language}
+									onValueChange={handleLanguageChange}
+								>
 									<SelectTrigger
 										className="w-auto hover:bg-accent"
 										size={"sm"}
@@ -188,18 +224,14 @@ export default function Security() {
 										align={"end"}
 									>
 										<SelectGroup>
-											<SelectItem value="instant">
-												Мгновенно
-											</SelectItem>
-											<SelectItem value="hourly">
-												Ежечасно
-											</SelectItem>
-											<SelectItem value="daily">
-												Ежедневно
-											</SelectItem>
-											<SelectItem value="weekly">
-												Еженедельно
-											</SelectItem>
+											{languages.map((lang) => (
+												<SelectItem
+													key={lang.value}
+													value={lang.value}
+												>
+													{lang.label}
+												</SelectItem>
+											))}
 										</SelectGroup>
 									</SelectContent>
 								</Select>
