@@ -54,7 +54,7 @@ const items = [
 	},
 	{
 		title: "Уведомления",
-		url: "#",
+		url: "/settings/notifications",
 		icon: Bell,
 	},
 	{

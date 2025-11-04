@@ -68,7 +68,7 @@ export default function Account() {
 							</InputGroup>
 						</div>
 						<div className="flex w-full flex-col gap-6">
-							<Item variant="outline">
+							<Item variant="outline" className="max-sm:flex-col">
 								<ItemContent>
 									<ItemTitle>
 										<BadgeX className="size-4" />
@@ -79,8 +79,10 @@ export default function Account() {
 										для подтверждения.
 									</ItemDescription>
 								</ItemContent>
-								<ItemActions>
-									<Button size="sm">Подтвердить</Button>
+								<ItemActions className="max-sm:w-full">
+									<Button size="sm" className="max-sm:w-full">
+										Подтвердить
+									</Button>
 								</ItemActions>
 							</Item>
 							<Alert>
