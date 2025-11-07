@@ -231,14 +231,36 @@ export default function ProjectsPage() {
 										</ItemDescription>
 									</ItemContent>
 									<ItemActions>
-										<Button
-											size="icon-sm"
-											variant="outline"
-											className="rounded-full"
-											aria-label="Invite"
-										>
-											<Plus />
-										</Button>
+										<DropdownMenu>
+											<DropdownMenuTrigger asChild>
+												<Button
+													size="icon-sm"
+													variant="ghost"
+													className="rounded-full"
+													aria-label="Invite"
+												>
+													<EllipsisVertical />
+												</Button>
+											</DropdownMenuTrigger>
+											<DropdownMenuContent
+												align={"end"}
+												className="min-w-40"
+											>
+												<DropdownMenuItem>
+													Поделиться
+												</DropdownMenuItem>
+												<DropdownMenuItem>
+													Настройки
+												</DropdownMenuItem>
+												<DropdownMenuSeparator />
+												<DropdownMenuItem>
+													Удалить
+												</DropdownMenuItem>
+												<DropdownMenuItem>
+													Архивировать
+												</DropdownMenuItem>
+											</DropdownMenuContent>
+										</DropdownMenu>
 									</ItemActions>
 								</Item>
 							</ItemGroup>

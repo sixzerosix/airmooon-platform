@@ -10,6 +10,7 @@ import {
 	Star,
 	CircleCheck,
 	Loader,
+	CircleDotDashed,
 } from "lucide-react";
 
 import {
@@ -49,12 +50,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 
 import { ChartProject } from "./chart-project";
+import { DataTable } from "./data-table";
 
 export default function ProjectsPage() {
 	return (
 		<Section>
 			<Container>
-				<div className="grid"></div>
 				<div className="flex max-sm:flex-col gap-5 justify-between">
 					<div className="flex-1">
 						<div className="grid gap-5">
@@ -68,17 +69,13 @@ export default function ProjectsPage() {
 										<Star className="fill-chart-4 text-chart-4" />
 									</Button>
 									<Avatar className="size-11 rounded-lg">
-										<Link href="/projects/12f9fdd3-b576-436a-9a92-8adf799ee47e">
-											<AvatarImage src="https://github.com/evilrabbit.png" />
-											<AvatarFallback>ER</AvatarFallback>
-										</Link>
+										<AvatarImage src="https://github.com/evilrabbit.png" />
+										<AvatarFallback>ER</AvatarFallback>
 									</Avatar>
 								</ItemMedia>
 								<ItemContent>
 									<ItemTitle>
-										<Link href="/projects/12f9fdd3-b576-436a-9a92-8adf799ee47e">
-											Evil Маркетинг
-										</Link>
+										Evil Маркетинг
 										<Badge variant={"outline"}>
 											Исследование
 										</Badge>
@@ -124,58 +121,7 @@ export default function ProjectsPage() {
 										Обновленно 5 минут назад
 									</ItemDescription>
 								</ItemContent>
-								<ItemContent>
-									<div className="*:data-[slot=avatar]:ring-background flex -space-x-3 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<Avatar>
-													<AvatarImage
-														src="https://github.com/shadcn.png"
-														alt="@shadcn"
-													/>
-													<AvatarFallback>
-														CN
-													</AvatarFallback>
-												</Avatar>
-											</TooltipTrigger>
-											<TooltipContent>
-												@Superman
-											</TooltipContent>
-										</Tooltip>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<Avatar>
-													<AvatarImage
-														src="https://github.com/maxleiter.png"
-														alt="@maxleiter"
-													/>
-													<AvatarFallback>
-														LR
-													</AvatarFallback>
-												</Avatar>
-											</TooltipTrigger>
-											<TooltipContent>
-												@Superman
-											</TooltipContent>
-										</Tooltip>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<Avatar>
-													<AvatarImage
-														src="https://github.com/evilrabbit.png"
-														alt="@evilrabbit"
-													/>
-													<AvatarFallback>
-														ER
-													</AvatarFallback>
-												</Avatar>
-											</TooltipTrigger>
-											<TooltipContent>
-												@Superman
-											</TooltipContent>
-										</Tooltip>
-									</div>
-								</ItemContent>
+
 								<ItemActions>
 									<DropdownMenu>
 										<DropdownMenuTrigger asChild>
@@ -237,6 +183,9 @@ export default function ProjectsPage() {
 									<TabsTrigger value="documentation">
 										Документация
 									</TabsTrigger>
+									<TabsTrigger value="discussions">
+										Обсуждения
+									</TabsTrigger>
 								</TabsList>
 								<TabsContent
 									value="activity"
@@ -251,7 +200,7 @@ export default function ProjectsPage() {
 								</TabsContent>
 								<TabsContent
 									value="tasks"
-									className="grid gap-2"
+									className="grid -space-y-[1px]"
 								>
 									<Item
 										variant="outline"
@@ -429,7 +378,7 @@ export default function ProjectsPage() {
 										className="rounded-xl bg-card"
 									>
 										<ItemMedia>
-											<CircleCheck className="size-4" />
+											<CircleDotDashed className="size-4" />
 										</ItemMedia>
 										<ItemContent>
 											<ItemTitle
@@ -519,12 +468,70 @@ export default function ProjectsPage() {
 										</CardContent>
 									</Card>
 								</TabsContent>
-								<TabsContent value="members">
-									<Card>
-										<CardContent>
-											<p>Company Details</p>
-										</CardContent>
-									</Card>
+								<TabsContent
+									value="members"
+									className="grid grid-cols-3 gap-2"
+								>
+									{Array(7)
+										.fill(0)
+										.map((_, i) => (
+											<Item
+												variant="outline"
+												key={i}
+												className="rounded-xl"
+											>
+												<ItemMedia>
+													<Avatar className="size-10">
+														<AvatarImage src="https://github.com/evilrabbit.png" />
+														<AvatarFallback>
+															ER
+														</AvatarFallback>
+													</Avatar>
+												</ItemMedia>
+												<ItemContent>
+													<ItemTitle>
+														Evil Rabbit
+													</ItemTitle>
+													<ItemDescription>
+														Last seen 5 months ago
+													</ItemDescription>
+												</ItemContent>
+												<ItemActions>
+													<DropdownMenu>
+														<DropdownMenuTrigger
+															asChild
+														>
+															<Button
+																size="icon-sm"
+																variant="ghost"
+																className="rounded-full"
+																aria-label="Invite"
+															>
+																<EllipsisVertical />
+															</Button>
+														</DropdownMenuTrigger>
+														<DropdownMenuContent
+															align={"end"}
+															className="min-w-40"
+														>
+															<DropdownMenuItem>
+																Поделиться
+															</DropdownMenuItem>
+															<DropdownMenuItem>
+																Настройки
+															</DropdownMenuItem>
+															<DropdownMenuSeparator />
+															<DropdownMenuItem>
+																Удалить
+															</DropdownMenuItem>
+															<DropdownMenuItem>
+																Архивировать
+															</DropdownMenuItem>
+														</DropdownMenuContent>
+													</DropdownMenu>
+												</ItemActions>
+											</Item>
+										))}
 								</TabsContent>
 								<TabsContent value="processes">
 									<Card>
@@ -534,22 +541,60 @@ export default function ProjectsPage() {
 									</Card>
 								</TabsContent>
 								<TabsContent value="documentation">
-									<Card>
-										<CardContent>
-											<p>Company Details</p>
-										</CardContent>
-									</Card>
+									<DataTable />
+								</TabsContent>
+								<TabsContent value="discussions">
+									<Item variant="outline">
+										<ItemMedia>
+											<Avatar className="size-10">
+												<AvatarImage src="https://github.com/evilrabbit.png" />
+												<AvatarFallback>
+													ER
+												</AvatarFallback>
+											</Avatar>
+										</ItemMedia>
+										<ItemContent>
+											<ItemTitle>Evil Rabbit</ItemTitle>
+											<ItemDescription>
+												Last seen 5 months ago
+											</ItemDescription>
+										</ItemContent>
+										<ItemActions>
+											<DropdownMenu>
+												<DropdownMenuTrigger asChild>
+													<Button
+														size="icon-sm"
+														variant="ghost"
+														className="rounded-full"
+														aria-label="Invite"
+													>
+														<EllipsisVertical />
+													</Button>
+												</DropdownMenuTrigger>
+												<DropdownMenuContent
+													align={"end"}
+													className="min-w-40"
+												>
+													<DropdownMenuItem>
+														Поделиться
+													</DropdownMenuItem>
+													<DropdownMenuItem>
+														Настройки
+													</DropdownMenuItem>
+													<DropdownMenuSeparator />
+													<DropdownMenuItem>
+														Удалить
+													</DropdownMenuItem>
+													<DropdownMenuItem>
+														Архивировать
+													</DropdownMenuItem>
+												</DropdownMenuContent>
+											</DropdownMenu>
+										</ItemActions>
+									</Item>
 								</TabsContent>
 							</Tabs>
 						</div>
-					</div>
-
-					<div className="max-w-3xs w-full">
-						<Card>
-							<CardContent>
-								<p>Company Details</p>
-							</CardContent>
-						</Card>
 					</div>
 				</div>
 			</Container>
