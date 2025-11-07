@@ -597,6 +597,199 @@ export default function ProjectsPage() {
 						</div>
 					</div>
 				</div>
+				<div className="flex max-sm:flex-col gap-4 justify-between mt-10">
+					<div className="flex-1 grid gap-4">
+						<Item variant="outline" className="rounded-xl">
+							<ItemMedia>
+								<Button
+									variant={"secondary"}
+									size={"icon-sm"}
+									className="absolute rounded-full -top-2 -left-2 z-10 size-6 border-2 border-background"
+								>
+									<Star className="fill-chart-4 text-chart-4" />
+								</Button>
+								<Avatar className="size-11 rounded-lg">
+									<AvatarImage src="https://github.com/evilrabbit.png" />
+									<AvatarFallback>ER</AvatarFallback>
+								</Avatar>
+							</ItemMedia>
+							<ItemContent>
+								<ItemTitle>
+									Evil Маркетинг
+									<Badge variant={"outline"}>
+										Исследование
+									</Badge>
+								</ItemTitle>
+								<ItemDescription className="flex gap-2 items-center">
+									<HoverCard>
+										<HoverCardTrigger asChild>
+											<Avatar className="size-4">
+												<AvatarImage src="https://github.com/evilrabbit.png" />
+												<AvatarFallback>
+													ER
+												</AvatarFallback>
+											</Avatar>
+										</HoverCardTrigger>
+										<HoverCardContent
+											className="w-80"
+											align={"start"}
+										>
+											<div className="flex justify-between gap-4">
+												<Avatar>
+													<AvatarImage src="https://github.com/vercel.png" />
+													<AvatarFallback>
+														VC
+													</AvatarFallback>
+												</Avatar>
+												<div className="space-y-1">
+													<h4 className="text-sm font-semibold">
+														@nextjs
+													</h4>
+													<p className="text-sm">
+														The React Framework -
+														created and maintained
+														by @vercel.
+													</p>
+													<div className="text-muted-foreground text-xs">
+														Joined December 2021
+													</div>
+												</div>
+											</div>
+										</HoverCardContent>
+									</HoverCard>
+									Обновленно 5 минут назад
+								</ItemDescription>
+							</ItemContent>
+
+							<ItemActions>
+								<DropdownMenu>
+									<DropdownMenuTrigger asChild>
+										<Button
+											size="icon-sm"
+											variant="ghost"
+											className="rounded-full"
+											aria-label="Invite"
+										>
+											<EllipsisVertical />
+										</Button>
+									</DropdownMenuTrigger>
+									<DropdownMenuContent
+										align={"end"}
+										className="min-w-40"
+									>
+										<DropdownMenuItem asChild>
+											<Link href="/projects/12f9fdd3-b576-436a-9a92-8adf799ee47e">
+												Открыть
+											</Link>
+										</DropdownMenuItem>
+										<DropdownMenuItem>
+											Поделиться
+										</DropdownMenuItem>
+										<DropdownMenuItem>
+											Настройки
+										</DropdownMenuItem>
+										<DropdownMenuSeparator />
+										<DropdownMenuItem>
+											Удалить
+										</DropdownMenuItem>
+										<DropdownMenuItem>
+											Архивировать
+										</DropdownMenuItem>
+									</DropdownMenuContent>
+								</DropdownMenu>
+							</ItemActions>
+						</Item>
+						<Card>
+							<CardContent className="h-[2000px]"></CardContent>
+						</Card>
+					</div>
+					<div className="relative">
+						<Card className="py-5 sticky top-24">
+							<CardContent className="px-5">
+								<div className="grid gap-2">
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Button variant={"secondary"}>
+												<CircleCheck />
+											</Button>
+										</TooltipTrigger>
+										<TooltipContent
+											align="center"
+											side="left"
+										>
+											@Superman
+										</TooltipContent>
+									</Tooltip>
+
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Button variant={"secondary"}>
+												<CircleCheck />
+											</Button>
+										</TooltipTrigger>
+										<TooltipContent
+											align="center"
+											side="left"
+										>
+											@Superman
+										</TooltipContent>
+									</Tooltip>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Button variant={"secondary"}>
+												<CircleCheck />
+											</Button>
+										</TooltipTrigger>
+										<TooltipContent
+											align="center"
+											side="left"
+										>
+											@Superman
+										</TooltipContent>
+									</Tooltip>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Button variant={"secondary"}>
+												<CircleCheck />
+											</Button>
+										</TooltipTrigger>
+										<TooltipContent
+											align="center"
+											side="left"
+										>
+											@Superman
+										</TooltipContent>
+									</Tooltip>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Button variant={"secondary"}>
+												<CircleCheck />
+											</Button>
+										</TooltipTrigger>
+										<TooltipContent
+											align="center"
+											side="left"
+										>
+											@Superman
+										</TooltipContent>
+									</Tooltip>
+								</div>
+							</CardContent>
+						</Card>
+					</div>
+					<div className="max-w-2xs min-w-[200px] w-full relative">
+						<Card className="py-5 sticky top-24">
+							<CardHeader>
+								<CardTitle>Заметки</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<div className="text-muted-foreground">
+									Нет заметок =(
+								</div>
+							</CardContent>
+						</Card>
+					</div>
+				</div>
 			</Container>
 		</Section>
 	);
