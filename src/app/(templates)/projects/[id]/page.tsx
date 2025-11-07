@@ -4,7 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Section, Container } from "@/components/layouts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { Plus, EllipsisVertical, Star } from "lucide-react";
+import {
+	Plus,
+	EllipsisVertical,
+	Star,
+	CircleCheck,
+	Loader,
+} from "lucide-react";
 
 import {
 	Tooltip,
@@ -41,6 +47,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { Badge } from "@/components/ui/badge";
+
+import { ChartProject } from "./chart-project";
 
 export default function ProjectsPage() {
 	return (
@@ -206,9 +214,10 @@ export default function ProjectsPage() {
 									</DropdownMenu>
 								</ItemActions>
 							</Item>
-							<Tabs defaultValue="account">
+
+							<Tabs defaultValue="activity" className="gap-4">
 								<TabsList>
-									<TabsTrigger value="account">
+									<TabsTrigger value="activity">
 										Активность
 										<Badge>12</Badge>
 									</TabsTrigger>
@@ -216,21 +225,315 @@ export default function ProjectsPage() {
 										Задачи
 										<Badge>12</Badge>
 									</TabsTrigger>
-									<TabsTrigger value="password">
+									<TabsTrigger value="stages">
 										Этапы
 									</TabsTrigger>
 									<TabsTrigger value="members">
 										Участники
 									</TabsTrigger>
+									<TabsTrigger value="processes">
+										Процессы
+									</TabsTrigger>
+									<TabsTrigger value="documentation">
+										Документация
+									</TabsTrigger>
 								</TabsList>
-								<TabsContent value="account">
+								<TabsContent
+									value="activity"
+									className="grid gap-4"
+								>
+									<ChartProject />
 									<Card>
 										<CardContent>
 											<p>Company Details</p>
 										</CardContent>
 									</Card>
 								</TabsContent>
-								<TabsContent value="password">
+								<TabsContent
+									value="tasks"
+									className="grid gap-2"
+								>
+									<Item
+										variant="outline"
+										size="sm"
+										className="rounded-xl bg-card"
+									>
+										<ItemMedia>
+											<CircleCheck className="size-4" />
+										</ItemMedia>
+										<ItemContent>
+											<ItemTitle
+												className={`${
+													true &&
+													"text-muted-foreground"
+												}`}
+											>
+												Your profile has been verified.
+												<Badge variant={"outline"}>
+													KPI: 112%
+												</Badge>
+											</ItemTitle>
+										</ItemContent>
+										<ItemContent>
+											<div className="*:data-[slot=avatar]:ring-background flex -space-x-3 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Avatar className="size-6">
+															<AvatarImage
+																src="https://github.com/shadcn.png"
+																alt="@shadcn"
+															/>
+															<AvatarFallback>
+																CN
+															</AvatarFallback>
+														</Avatar>
+													</TooltipTrigger>
+													<TooltipContent>
+														@Superman
+													</TooltipContent>
+												</Tooltip>
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Avatar className="size-6">
+															<AvatarImage
+																src="https://github.com/evilrabbit.png"
+																alt="@evilrabbit"
+															/>
+															<AvatarFallback>
+																ER
+															</AvatarFallback>
+														</Avatar>
+													</TooltipTrigger>
+													<TooltipContent>
+														@Superman
+													</TooltipContent>
+												</Tooltip>
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Avatar className="size-6">
+															<AvatarImage
+																src="https://github.com/maxleiter.png"
+																alt="@maxleiter"
+															/>
+															<AvatarFallback>
+																LR
+															</AvatarFallback>
+														</Avatar>
+													</TooltipTrigger>
+													<TooltipContent>
+														@Superman
+													</TooltipContent>
+												</Tooltip>
+
+												<Button
+													variant={"secondary"}
+													size={"sm"}
+													className="z-10 h-6 px-2 rounded-full text-xs"
+												>
+													+6
+												</Button>
+											</div>
+										</ItemContent>
+										<ItemActions>
+											<EllipsisVertical className="size-4" />
+										</ItemActions>
+									</Item>
+									<Item
+										variant="outline"
+										size="sm"
+										className="rounded-xl bg-card"
+									>
+										<ItemMedia>
+											<Loader className="size-4" />
+										</ItemMedia>
+										<ItemContent>
+											<ItemTitle
+												className={`${
+													false &&
+													"text-muted-foreground"
+												}`}
+											>
+												Your profile has been verified.
+												<Badge variant={"outline"}>
+													KPI: 112%
+												</Badge>
+											</ItemTitle>
+										</ItemContent>
+										<ItemContent>
+											<div className="*:data-[slot=avatar]:ring-background flex -space-x-3 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Avatar className="size-6">
+															<AvatarImage
+																src="https://github.com/shadcn.png"
+																alt="@shadcn"
+															/>
+															<AvatarFallback>
+																CN
+															</AvatarFallback>
+														</Avatar>
+													</TooltipTrigger>
+													<TooltipContent>
+														@Superman
+													</TooltipContent>
+												</Tooltip>
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Avatar className="size-6">
+															<AvatarImage
+																src="https://github.com/evilrabbit.png"
+																alt="@evilrabbit"
+															/>
+															<AvatarFallback>
+																ER
+															</AvatarFallback>
+														</Avatar>
+													</TooltipTrigger>
+													<TooltipContent>
+														@Superman
+													</TooltipContent>
+												</Tooltip>
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Avatar className="size-6">
+															<AvatarImage
+																src="https://github.com/maxleiter.png"
+																alt="@maxleiter"
+															/>
+															<AvatarFallback>
+																LR
+															</AvatarFallback>
+														</Avatar>
+													</TooltipTrigger>
+													<TooltipContent>
+														@Superman
+													</TooltipContent>
+												</Tooltip>
+
+												<Button
+													variant={"secondary"}
+													size={"sm"}
+													className="z-10 h-6 px-2 rounded-full text-xs"
+												>
+													+6
+												</Button>
+											</div>
+										</ItemContent>
+										<ItemActions>
+											<EllipsisVertical className="size-4" />
+										</ItemActions>
+									</Item>
+									<Item
+										variant="outline"
+										size="sm"
+										className="rounded-xl bg-card"
+									>
+										<ItemMedia>
+											<CircleCheck className="size-4" />
+										</ItemMedia>
+										<ItemContent>
+											<ItemTitle
+												className={`${
+													true &&
+													"text-muted-foreground"
+												}`}
+											>
+												Your profile has been verified.
+												<Badge variant={"outline"}>
+													KPI: 112%
+												</Badge>
+											</ItemTitle>
+										</ItemContent>
+										<ItemContent>
+											<div className="*:data-[slot=avatar]:ring-background flex -space-x-3 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Avatar className="size-6">
+															<AvatarImage
+																src="https://github.com/shadcn.png"
+																alt="@shadcn"
+															/>
+															<AvatarFallback>
+																CN
+															</AvatarFallback>
+														</Avatar>
+													</TooltipTrigger>
+													<TooltipContent>
+														@Superman
+													</TooltipContent>
+												</Tooltip>
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Avatar className="size-6">
+															<AvatarImage
+																src="https://github.com/evilrabbit.png"
+																alt="@evilrabbit"
+															/>
+															<AvatarFallback>
+																ER
+															</AvatarFallback>
+														</Avatar>
+													</TooltipTrigger>
+													<TooltipContent>
+														@Superman
+													</TooltipContent>
+												</Tooltip>
+												<Tooltip>
+													<TooltipTrigger asChild>
+														<Avatar className="size-6">
+															<AvatarImage
+																src="https://github.com/maxleiter.png"
+																alt="@maxleiter"
+															/>
+															<AvatarFallback>
+																LR
+															</AvatarFallback>
+														</Avatar>
+													</TooltipTrigger>
+													<TooltipContent>
+														@Superman
+													</TooltipContent>
+												</Tooltip>
+
+												<Button
+													variant={"secondary"}
+													size={"sm"}
+													className="z-10 h-6 px-2 rounded-full text-xs"
+												>
+													+6
+												</Button>
+											</div>
+										</ItemContent>
+										<ItemActions>
+											<EllipsisVertical className="size-4" />
+										</ItemActions>
+									</Item>
+								</TabsContent>
+								<TabsContent
+									value="stages"
+									className="grid gap-4"
+								>
+									<Card>
+										<CardContent>
+											<p>Company Details</p>
+										</CardContent>
+									</Card>
+								</TabsContent>
+								<TabsContent value="members">
+									<Card>
+										<CardContent>
+											<p>Company Details</p>
+										</CardContent>
+									</Card>
+								</TabsContent>
+								<TabsContent value="processes">
+									<Card>
+										<CardContent>
+											<p>Company Details</p>
+										</CardContent>
+									</Card>
+								</TabsContent>
+								<TabsContent value="documentation">
 									<Card>
 										<CardContent>
 											<p>Company Details</p>
