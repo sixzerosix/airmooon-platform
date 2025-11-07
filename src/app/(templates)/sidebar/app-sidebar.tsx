@@ -62,7 +62,7 @@ const items = [
 	},
 	{
 		title: "Компания",
-		url: "#",
+		url: "/company",
 		icon: Building2,
 	},
 	{
@@ -112,7 +112,7 @@ const items = [
 	},
 	{
 		title: "Проекты",
-		url: "#",
+		url: "/projects",
 		icon: Combine,
 	},
 	{
