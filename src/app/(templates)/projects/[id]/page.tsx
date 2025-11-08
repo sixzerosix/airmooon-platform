@@ -11,7 +11,49 @@ import {
 	CircleCheck,
 	Loader,
 	CircleDotDashed,
+	Calendar,
+	Home,
+	Inbox,
+	Search,
+	IdCard,
+	BookUser,
+	Drama,
+	Orbit,
+	Building2,
+	Blocks,
+	ListCheck,
+	ScrollText,
+	ListTodo,
+	Bot,
+	Combine,
+	BotMessageSquare,
+	Users,
+	Footprints,
+	Puzzle,
+	Gem,
+	Settings,
+	Hamburger,
+	GalleryVerticalEnd,
+	AudioWaveform,
+	Command,
+	Landmark,
+	Dna,
+	Cpu,
+	SquareChartGantt,
+	History,
+	Bell,
 } from "lucide-react";
+
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
 
 import {
 	Tooltip,
@@ -51,6 +93,44 @@ import { Badge } from "@/components/ui/badge";
 
 import { ChartProject } from "./chart-project";
 import { DataTable } from "./data-table";
+
+const tabs = [
+	{
+		title: "Астивность",
+		id: "activity",
+		icon: History,
+	},
+	{
+		title: "Отчёты",
+		id: "reports",
+		icon: SquareChartGantt,
+	},
+	{
+		title: "Сотрудники",
+		id: "employees",
+		icon: Users,
+	},
+	{
+		title: "Процессы",
+		id: "processes",
+		icon: Orbit,
+	},
+	{
+		title: "Задачи",
+		id: "tasks",
+		icon: ListTodo,
+	},
+	{
+		title: "Чек-листы",
+		id: "checklists",
+		icon: ListCheck,
+	},
+	{
+		title: "Этапы",
+		id: "stages",
+		icon: Footprints,
+	},
+];
 
 export default function ProjectsPage() {
 	return (
@@ -211,17 +291,57 @@ export default function ProjectsPage() {
 											<CircleCheck className="size-4" />
 										</ItemMedia>
 										<ItemContent>
-											<ItemTitle
-												className={`${
-													true &&
-													"text-muted-foreground"
-												}`}
-											>
-												Your profile has been verified.
-												<Badge variant={"outline"}>
-													KPI: 112%
-												</Badge>
-											</ItemTitle>
+											<Dialog>
+												<DialogTrigger asChild>
+													<ItemTitle
+														className={`${
+															true &&
+															"text-muted-foreground"
+														}`}
+													>
+														Your profile has been
+														verified.
+														<Badge
+															variant={"outline"}
+														>
+															KPI: 112%
+														</Badge>
+													</ItemTitle>
+												</DialogTrigger>
+												<DialogContent className="sm:max-w-2xl">
+													<DialogHeader>
+														<DialogTitle className="flex gap-2">
+															<div className="size-5 flex items-center justify-center bg-transparent rounded-full ring-4 ring-transparent hover:bg-secondary hover:ring-secondary">
+																<Star className="size-4" />
+															</div>
+															Task name
+														</DialogTitle>
+														<DialogDescription>
+															Далеко-далеко за
+															словесными горами в
+															стране гласных и
+															согласных живут
+															рыбные тексты.
+															Реторический
+															проектах маленький
+															рекламных
+															безорфографичный
+															буквоград!
+														</DialogDescription>
+													</DialogHeader>
+													<div></div>
+													<DialogFooter className="sm:justify-start">
+														<DialogClose asChild>
+															<Button
+																type="button"
+																variant="secondary"
+															>
+																Close
+															</Button>
+														</DialogClose>
+													</DialogFooter>
+												</DialogContent>
+											</Dialog>
 										</ItemContent>
 										<ItemContent>
 											<div className="*:data-[slot=avatar]:ring-background flex -space-x-3 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
@@ -287,6 +407,7 @@ export default function ProjectsPage() {
 											<EllipsisVertical className="size-4" />
 										</ItemActions>
 									</Item>
+
 									<Item
 										variant="outline"
 										size="sm"
@@ -598,7 +719,7 @@ export default function ProjectsPage() {
 					</div>
 				</div>
 				<div className="flex max-sm:flex-col gap-4 justify-between mt-10">
-					<div className="flex-1 grid gap-4">
+					<div className="flex-1 flex flex-col gap-4">
 						<Item variant="outline" className="rounded-xl">
 							<ItemMedia>
 								<Button
@@ -700,66 +821,28 @@ export default function ProjectsPage() {
 							</ItemActions>
 						</Item>
 						<Card>
-							<CardContent className="h-[2000px]"></CardContent>
+							<CardContent className=""></CardContent>
 						</Card>
 					</div>
 					<div className="relative">
 						<Card className="py-5 sticky top-24">
 							<CardContent className="px-5">
 								<div className="grid gap-2">
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button variant={"secondary"}>
-												<CircleCheck />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent
-											align="center"
-											side="left"
-										>
-											@Superman
-										</TooltipContent>
-									</Tooltip>
-
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button variant={"secondary"}>
-												<CircleCheck />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent
-											align="center"
-											side="left"
-										>
-											@Superman
-										</TooltipContent>
-									</Tooltip>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button variant={"secondary"}>
-												<CircleCheck />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent
-											align="center"
-											side="left"
-										>
-											@Superman
-										</TooltipContent>
-									</Tooltip>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button variant={"secondary"}>
-												<CircleCheck />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent
-											align="center"
-											side="left"
-										>
-											@Superman
-										</TooltipContent>
-									</Tooltip>
+									{tabs.map((tab) => (
+										<Tooltip key={tab.id}>
+											<TooltipTrigger asChild>
+												<Button variant={"secondary"}>
+													<tab.icon />
+												</Button>
+											</TooltipTrigger>
+											<TooltipContent
+												align="center"
+												side="left"
+											>
+												{tab.title}
+											</TooltipContent>
+										</Tooltip>
+									))}
 									<Tooltip>
 										<TooltipTrigger asChild>
 											<Button variant={"secondary"}>
