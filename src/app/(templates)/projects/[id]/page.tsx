@@ -42,6 +42,11 @@ import {
 	SquareChartGantt,
 	History,
 	Bell,
+	ThumbsUp,
+	ThumbsDown,
+	ChevronDown,
+	Disc,
+	Dot,
 } from "lucide-react";
 
 import {
@@ -93,6 +98,7 @@ import { Badge } from "@/components/ui/badge";
 
 import { ChartProject } from "./chart-project";
 import { DataTable } from "./data-table";
+import { Toggle } from "@/components/ui/toggle";
 
 const tabs = [
 	{
@@ -665,54 +671,394 @@ export default function ProjectsPage() {
 									<DataTable />
 								</TabsContent>
 								<TabsContent value="discussions">
-									<Item variant="outline">
-										<ItemMedia>
-											<Avatar className="size-10">
-												<AvatarImage src="https://github.com/evilrabbit.png" />
-												<AvatarFallback>
-													ER
-												</AvatarFallback>
-											</Avatar>
-										</ItemMedia>
-										<ItemContent>
-											<ItemTitle>Evil Rabbit</ItemTitle>
-											<ItemDescription>
-												Last seen 5 months ago
-											</ItemDescription>
-										</ItemContent>
-										<ItemActions>
-											<DropdownMenu>
-												<DropdownMenuTrigger asChild>
-													<Button
-														size="icon-sm"
-														variant="ghost"
-														className="rounded-full"
-														aria-label="Invite"
-													>
-														<EllipsisVertical />
-													</Button>
-												</DropdownMenuTrigger>
-												<DropdownMenuContent
-													align={"end"}
-													className="min-w-40"
-												>
-													<DropdownMenuItem>
-														Поделиться
-													</DropdownMenuItem>
-													<DropdownMenuItem>
-														Настройки
-													</DropdownMenuItem>
-													<DropdownMenuSeparator />
-													<DropdownMenuItem>
-														Удалить
-													</DropdownMenuItem>
-													<DropdownMenuItem>
-														Архивировать
-													</DropdownMenuItem>
-												</DropdownMenuContent>
-											</DropdownMenu>
-										</ItemActions>
-									</Item>
+									<div className="grid grid-cols-4 gap-5">
+										<div className="grid gap-5 col-span-3">
+											<div className="grid gap-3">
+												<div className="flex">
+													<div className="flex-1 flex gap-3 items-center">
+														<div>
+															<Avatar className="size-10">
+																<AvatarImage src="https://github.com/evilrabbit.png" />
+																<AvatarFallback>
+																	ER
+																</AvatarFallback>
+															</Avatar>
+														</div>
+														<div className="grid gap-1">
+															<div className="text-sm font-medium">
+																Heldor Helgason
+															</div>
+															<div className="text-sm text-muted-foreground">
+																5 минут назад
+															</div>
+														</div>
+													</div>
+													<div>
+														<DropdownMenu>
+															<DropdownMenuTrigger
+																asChild
+															>
+																<Button
+																	size="icon-sm"
+																	variant="ghost"
+																	className="rounded-full"
+																	aria-label="Invite"
+																>
+																	<EllipsisVertical />
+																</Button>
+															</DropdownMenuTrigger>
+															<DropdownMenuContent
+																align={"end"}
+																className="min-w-40"
+															>
+																<DropdownMenuItem>
+																	Поделиться
+																</DropdownMenuItem>
+																<DropdownMenuItem>
+																	Настройки
+																</DropdownMenuItem>
+																<DropdownMenuSeparator />
+																<DropdownMenuItem>
+																	Удалить
+																</DropdownMenuItem>
+																<DropdownMenuItem>
+																	Архивировать
+																</DropdownMenuItem>
+															</DropdownMenuContent>
+														</DropdownMenu>
+													</div>
+												</div>
+											</div>
+											<div className="grid gap-2 p-5 border rounded-2xl">
+												{/* Header */}
+												<div className="flex">
+													<div className="flex-1 flex gap-3 items-center">
+														<div>
+															<Avatar className="size-6">
+																<AvatarImage src="https://github.com/evilrabbit.png" />
+																<AvatarFallback>
+																	ER
+																</AvatarFallback>
+															</Avatar>
+														</div>
+														<div className="flex items-center gap-0.5">
+															<div className="text-sm font-medium">
+																Heldor Helgason
+															</div>
+															<div className="text-xs text-muted-foreground">
+																<Dot className="size-4" />
+															</div>
+															<div className="text-sm text-muted-foreground">
+																5 минут назад
+															</div>
+														</div>
+													</div>
+													<div>
+														<DropdownMenu>
+															<DropdownMenuTrigger
+																asChild
+															>
+																<Button
+																	size="icon-sm"
+																	variant="ghost"
+																	className="rounded-full"
+																	aria-label="Invite"
+																>
+																	<EllipsisVertical />
+																</Button>
+															</DropdownMenuTrigger>
+															<DropdownMenuContent
+																align={"end"}
+																className="min-w-40"
+															>
+																<DropdownMenuItem>
+																	Поделиться
+																</DropdownMenuItem>
+																<DropdownMenuItem>
+																	Настройки
+																</DropdownMenuItem>
+																<DropdownMenuSeparator />
+																<DropdownMenuItem>
+																	Удалить
+																</DropdownMenuItem>
+																<DropdownMenuItem>
+																	Архивировать
+																</DropdownMenuItem>
+															</DropdownMenuContent>
+														</DropdownMenu>
+													</div>
+												</div>
+												{/* Body */}
+												<div className="grid gap-3 text-sm">
+													<div>
+														Очевидно, мы столкнулись
+														с переобучением.
+														Необходимо немедленно
+														усилить регуляризацию
+														(Dropout), снизить
+														количество слоев и, что
+														более важно, расширить
+														набор признаков
+														(features), добавив
+														макроэкономические
+														индикаторы, чтобы модель
+														научилась обобщать, а не
+														просто запоминать шум.
+													</div>
+
+													{/* Reactions */}
+													<div className="flex items-center gap-2">
+														<div className="">
+															<Toggle
+																size={"sm"}
+																className="h-7 rounded-full px-2 data-[state=on]:bg-primary data-[state=on]:text-secondary data-[state=on]:*:[svg]:fill-secondary data-[state=on]:*:[svg]:stroke-secondary"
+															>
+																<ThumbsUp />
+																<span>2</span>
+															</Toggle>
+															<Toggle
+																size={"sm"}
+																className="h-7 rounded-full px-2 data-[state=on]:bg-primary data-[state=on]:text-secondary data-[state=on]:*:[svg]:fill-secondary data-[state=on]:*:[svg]:stroke-secondary"
+															>
+																<ThumbsDown />
+																<span>2</span>
+															</Toggle>
+														</div>
+														<div className="*:data-[slot=avatar]:ring-background flex -space-x-3 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+															<Tooltip>
+																<TooltipTrigger
+																	asChild
+																>
+																	<Avatar className="size-6">
+																		<AvatarImage
+																			src="https://github.com/shadcn.png"
+																			alt="@shadcn"
+																		/>
+																		<AvatarFallback>
+																			CN
+																		</AvatarFallback>
+																	</Avatar>
+																</TooltipTrigger>
+																<TooltipContent>
+																	@Superman
+																</TooltipContent>
+															</Tooltip>
+															<Tooltip>
+																<TooltipTrigger
+																	asChild
+																>
+																	<Avatar className="size-6">
+																		<AvatarImage
+																			src="https://github.com/evilrabbit.png"
+																			alt="@evilrabbit"
+																		/>
+																		<AvatarFallback>
+																			ER
+																		</AvatarFallback>
+																	</Avatar>
+																</TooltipTrigger>
+																<TooltipContent>
+																	@Superman
+																</TooltipContent>
+															</Tooltip>
+														</div>
+														<div className="flex flex-1 justify-end text-accent-foreground">
+															<Button
+																variant={
+																	"ghost"
+																}
+																size={"sm"}
+																className="rounded-full h-7"
+															>
+																Ответы(3)
+																<ChevronDown />
+															</Button>
+														</div>
+													</div>
+												</div>
+												{/* Sub comments */}
+												<div className="grid gap-4 pl-8 pt-5">
+													{Array(4)
+														.fill(null)
+														.map((_, i) => (
+															<div
+																key={i}
+																className="grid gap-2"
+															>
+																{/* Header */}
+																<div className="flex">
+																	<div className="flex-1 flex gap-3 items-center">
+																		<div>
+																			<Avatar className="size-6">
+																				<AvatarImage src="https://github.com/evilrabbit.png" />
+																				<AvatarFallback>
+																					ER
+																				</AvatarFallback>
+																			</Avatar>
+																		</div>
+																		<div className="flex items-center gap-0.5">
+																			<div className="text-sm font-medium">
+																				Heldor
+																				Helgason
+																			</div>
+																			<div className="text-xs text-muted-foreground">
+																				<Dot className="size-4" />
+																			</div>
+																			<div className="text-sm text-muted-foreground">
+																				5
+																				минут
+																				назад
+																			</div>
+																		</div>
+																	</div>
+																	<div>
+																		<DropdownMenu>
+																			<DropdownMenuTrigger
+																				asChild
+																			>
+																				<Button
+																					size="icon-sm"
+																					variant="ghost"
+																					className="rounded-full"
+																					aria-label="Invite"
+																				>
+																					<EllipsisVertical />
+																				</Button>
+																			</DropdownMenuTrigger>
+																			<DropdownMenuContent
+																				align={
+																					"end"
+																				}
+																				className="min-w-40"
+																			>
+																				<DropdownMenuItem>
+																					Поделиться
+																				</DropdownMenuItem>
+																				<DropdownMenuItem>
+																					Настройки
+																				</DropdownMenuItem>
+																				<DropdownMenuSeparator />
+																				<DropdownMenuItem>
+																					Удалить
+																				</DropdownMenuItem>
+																				<DropdownMenuItem>
+																					Архивировать
+																				</DropdownMenuItem>
+																			</DropdownMenuContent>
+																		</DropdownMenu>
+																	</div>
+																</div>
+																{/* Body */}
+																<div className="grid gap-3 text-sm">
+																	<div>
+																		Очевидно,
+																		мы
+																		столкнулись
+																		с
+																		переобучением.
+																		Необходимо
+																		немедленно
+																		усилить
+																		регуляризацию
+																		(Dropout),
+																		снизить
+																		количество
+																		слоев и,
+																		что
+																		более
+																		важно,
+																		расширить
+																		набор
+																		признаков
+																		(features),
+																		добавив
+																		макроэкономические
+																		индикаторы,
+																		чтобы
+																		модель
+																		научилась
+																		обобщать,
+																		а не
+																		просто
+																		запоминать
+																		шум.
+																	</div>
+
+																	{/* Reactions */}
+																	<div className="flex items-center gap-2">
+																		<div className="">
+																			<Toggle
+																				size={
+																					"sm"
+																				}
+																				className="h-7 rounded-full px-2 data-[state=on]:bg-primary data-[state=on]:text-secondary data-[state=on]:*:[svg]:fill-secondary data-[state=on]:*:[svg]:stroke-secondary"
+																			>
+																				<ThumbsUp />
+																				<span>
+																					2
+																				</span>
+																			</Toggle>
+																			<Toggle
+																				size={
+																					"sm"
+																				}
+																				className="h-7 rounded-full px-2 data-[state=on]:bg-primary data-[state=on]:text-secondary data-[state=on]:*:[svg]:fill-secondary data-[state=on]:*:[svg]:stroke-secondary"
+																			>
+																				<ThumbsDown />
+																				<span>
+																					2
+																				</span>
+																			</Toggle>
+																		</div>
+																		<div className="*:data-[slot=avatar]:ring-background flex -space-x-3 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+																			<Tooltip>
+																				<TooltipTrigger
+																					asChild
+																				>
+																					<Avatar className="size-6">
+																						<AvatarImage
+																							src="https://github.com/shadcn.png"
+																							alt="@shadcn"
+																						/>
+																						<AvatarFallback>
+																							CN
+																						</AvatarFallback>
+																					</Avatar>
+																				</TooltipTrigger>
+																				<TooltipContent>
+																					@Superman
+																				</TooltipContent>
+																			</Tooltip>
+																			<Tooltip>
+																				<TooltipTrigger
+																					asChild
+																				>
+																					<Avatar className="size-6">
+																						<AvatarImage
+																							src="https://github.com/evilrabbit.png"
+																							alt="@evilrabbit"
+																						/>
+																						<AvatarFallback>
+																							ER
+																						</AvatarFallback>
+																					</Avatar>
+																				</TooltipTrigger>
+																				<TooltipContent>
+																					@Superman
+																				</TooltipContent>
+																			</Tooltip>
+																		</div>
+																		<div className="flex flex-1 justify-end text-accent-foreground"></div>
+																	</div>
+																</div>
+																{/* Sub comments */}
+																<div></div>
+															</div>
+														))}
+												</div>
+											</div>
+										</div>
+									</div>
 								</TabsContent>
 							</Tabs>
 						</div>
