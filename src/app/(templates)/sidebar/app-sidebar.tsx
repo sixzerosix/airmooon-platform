@@ -27,6 +27,8 @@ import {
 	AudioWaveform,
 	Command,
 	Landmark,
+	MessageSquare,
+	MessagesSquare,
 	Dna,
 	Cpu,
 	SquareChartGantt,
@@ -59,6 +61,11 @@ const items = [
 		title: "Астивность",
 		url: "/activity",
 		icon: History,
+	},
+	{
+		title: "Комментарии",
+		url: "/comments",
+		icon: MessagesSquare,
 	},
 	{
 		title: "Компания",
